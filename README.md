@@ -14,8 +14,8 @@
 旅行先やちょっと出かけた先でどこに行こうか迷ったとき、地元や住んでるところを開拓したい時に検索できる
 
 ## 設計書
-[ER図]: https://app.diagrams.net/#G1hzGyShsfYTBZPZhXKUNSuknbXGXEngFJ
-[テーブル定義書]: https://docs.google.com/spreadsheets/d/1NiIMUzkn8DBCp7RWL6rXD7OQG8RrPxQFoaPDSD3_Xro/edit#gid=167916463
+[ER図](https://app.diagrams.net/#G1hzGyShsfYTBZPZhXKUNSuknbXGXEngFJ)
+[テーブル定義書](https://docs.google.com/spreadsheets/d/1NiIMUzkn8DBCp7RWL6rXD7OQG8RrPxQFoaPDSD3_Xro/edit#gid=167916463)
 
 ## 開発環境
 - OS：Linux(CentOS)
