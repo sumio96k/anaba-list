@@ -1,2 +1,23 @@
-<h1>Homes#about</h1>
-<p>Find me in app/views/homes/about.html.erb</p>
+<h1>アバウトページ</h1>
+<div class="container">
+  <div class="row">
+    <div class="px-3 mx-auto">
+      <h2>アナバリストとは</h2><br>
+      <p>街の穴場スポットやあなたしか知らない本当は教えたくないような</p><br>
+      <p>特別な場所をシェアしたり、あなたの知らなかった魅力溢れるスポットを発見できるサイトです。</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <%= link_to 'カテゴリーから探す', categories_path %>
+    </div>
+
+    <div class="col">
+      <%= link_to '人気のエリアから探す', areas_path %>
+    </div>
+
+    <div class="col">
+      <%= link_to '都道府県から探す', prefectures_path %>
+    </div>
+  </div>
+</div>

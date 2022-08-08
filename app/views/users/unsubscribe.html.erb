@@ -1,2 +1,32 @@
-<h1>Users#unsubscribe</h1>
-<p>Find me in app/views/users/unsubscribe.html.erb</p>
+<h1>退会確認画面</h1>
+<div class="container">
+  <% if @user == current_user %>
+  <div class="row">
+    <div class="col">
+      <h3>本当に退会しますか？</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2">
+      <%= link_to "戻る", edit_user_path(@user.id), class: "btn btn-outline-secondary" %>
+    </div>
+    <div class="col-2">
+      <%= link_to "退会する", withdraw_path(@user.id), method: :patch, class: "btn btn-outline-danger" %>
+    </div>
+  </div>
+  <% elsif current_user.admin == true %>
+  <div class="row">
+    <div class="col">
+      <h3>本当に<%= @user.name %>を退会させますか？</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2">
+      <%= link_to "戻る", edit_user_path(@user.id), class: "btn btn-outline-secondary" %>
+    </div>
+    <div class="col-2">
+      <%= link_to "退会させる", withdraw_path(@user.id), method: :patch, class: "btn btn-outline-danger" %>
+    </div>
+  </div>
+  <% end %>
+</div>

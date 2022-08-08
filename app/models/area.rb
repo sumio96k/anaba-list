@@ -1,6 +1,6 @@
-class Prefecture < ActiveHash::Base
+class Area < ActiveHash::Base
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :prefecture
+  # belongs_to :prefecture
 
 self.data = [
   #北海道

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AnabaList</title>
+    <title>anabaList</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,14 @@
   </head>
 
   <body>
+    <%= render 'layouts/header' %>
+    <% if user_signed_in? && (current_user.name != "guestuser") && (current_user.admin == false) %>
+      <span>ログイン中</span>
+    <% elsif user_signed_in? && (current_user.name == "guestuser") %>
+      <span>ゲストユーザーログイン中</span>
+    <% elsif user_signed_in? && (current_user.admin == true) %>
+      <span>管理者ログイン中</span>
+    <% end %>
     <%= yield %>
   </body>
 </html>
