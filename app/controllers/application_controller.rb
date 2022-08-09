@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :user_status, only: [:create]
+  before_action :user_status, only: [:create], if: :devise_controller?
 
 
   protected
@@ -16,4 +16,6 @@ class ApplicationController < ActionController::Base
       redirect_to new_user_registration_path
     end
   end
+
+
 end

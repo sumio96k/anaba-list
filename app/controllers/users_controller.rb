@@ -3,11 +3,14 @@ class UsersController < ApplicationController
   before_action :ensure_guest_user, only: [:edit]
 
   def index
-    @users = User.all - admin_user
+    @users = all_users_without_admin_deleted
   end
 
   def show
     @user = User.find(params[:id])
+    if @user.admin == true || @user.is_deleted == true
+      redirect_to root_path
+    end
     @posts = @user.posts
     @prefectures = Prefecture.all
   end
@@ -32,6 +35,7 @@ class UsersController < ApplicationController
   def withdraw
     @user = User.find(params[:id])
     @user.update(is_deleted: true)
+    sign_out current_user
     redirect_to root_path
   end
 
@@ -53,11 +57,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def admin_user
-    User.where(admin: true)
+  def all_users_without_admin_deleted
+    User.all - User.where(admin: true) - User.where(is_deleted: true)
   end
-
-
 
 
 end

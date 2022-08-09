@@ -27,7 +27,8 @@
       <div>
         <%= image_tag post.get_image(200,200) %><br>
         #<%= @prefectures.find_by(id: post.area.prefecture_id).name %><br>
-        #<%= post.area.name %>
+        #<%= post.area.name %><br>
+        #<%= post.category.name %>
       </div>
     </div>
     <% end %>

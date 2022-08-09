@@ -1,1 +1,22 @@
 <h1>投稿ページ</h1>
+
+<%= form_with model: @post, url: posts_path, method: :post do |f| %>
+  <%= f.label :image do  %>
+    <i class="fas fa-file-image fa-4x"></i>
+    <%= f.file_field :image, style: "display: none;"  %>
+  <% end %>
+
+  <%= f.text_field :title, placeholder: "タイトル", class: "form-control" %>
+
+  <%= f.text_area :body, placeholder: "説明文", class: "form-control" %>
+
+  <%= f.text_field :address, placeholder: "大体の住所でOK", class: "form-control" %>
+
+  <%= f.collection_select(:category_id, Category.all, :id, :name, {include_blank: "カテゴリー選択"}, {class: "form-select"} ) %>
+
+  <%= f.collection_select(nil, Prefecture.all, :id, :name, {include_blank: "都道府県選択"}, {class: "form-select prefecture_select"} ) %>
+
+  <%= f.collection_select(:area_id, Area.all, :id, :name, {include_blank: "エリア選択"}, {class: "form-select area_select"} ) %>
+
+  <%= f.submit '投稿する', class: "btn btn-primary" %>
+<% end %>
