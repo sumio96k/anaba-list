@@ -22,7 +22,7 @@ users = User.create!(
   ]
 )
 
-Post.create!(
+ posts = Post.create!(
   [
     {title: '東京タワーの下', body: '東京タワーを下から見るこの場所が好きです。', address: '東京都港区芝公園', category_id: 2, area_id: 93, user_id: users[1].id,
     image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post1.jpg"), filename:"sample-post1.jpg")},
@@ -35,5 +35,19 @@ Post.create!(
 
     {title: '東京でサーフィンが体験できる!?', body: 'サーフィンが体験できる施設です', address: '東京都品川区', category_id: 5, area_id: 93, user_id: users[1].id,
     image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post4.jpg"), filename:"sample-post4.jpg")}
+  ]
+)
+
+tags = Tag.create!(
+  [
+    {name: "エモい"},{name: "アングラ"},{name: "お笑い"},{name: "台湾ラーメン"},{name: "グルメ"},{name: "サーフィン"},{name: "夏"}
+  ]
+)
+
+PostTag.create!(
+  [
+    {post_id: posts[0].id, tag_id: tags[0].id },{post_id: posts[1].id, tag_id: tags[1].id },{post_id: posts[1].id, tag_id: tags[2].id },
+    {post_id: posts[2].id, tag_id: tags[3].id },{post_id: posts[2].id, tag_id: tags[4].id },{post_id: posts[3].id, tag_id: tags[5].id },
+    {post_id: posts[3].id, tag_id: tags[6].id },
   ]
 )

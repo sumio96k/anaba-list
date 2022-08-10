@@ -14,9 +14,11 @@
 
   <%= f.collection_select(:category_id, Category.all, :id, :name, {include_blank: "カテゴリー選択"}, {class: "form-select"} ) %>
 
-  <%= f.collection_select(nil, Prefecture.all, :id, :name, {include_blank: "都道府県選択"}, {class: "form-select prefecture_select"} ) %>
+  <%= f.collection_select(:prefecture, Prefecture.all, :id, :name, {include_blank: "都道府県選択"}, {class: "form-select prefecture_select"} ) %>
 
   <%= f.collection_select(:area_id, Area.all, :id, :name, {include_blank: "エリア選択"}, {class: "form-select area_select"} ) %>
+
+  <%= f.text_field :name, placeholder: "タグ (スペースで区切ると複数タグ登録できます)", class: 'form-control' %>
 
   <%= f.submit '投稿する', class: "btn btn-primary" %>
 <% end %>

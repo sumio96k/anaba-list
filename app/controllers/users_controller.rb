@@ -28,6 +28,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to root_path
+  end
+
   def unsubscribe
     @user = User.find(params[:id])
   end
@@ -47,7 +53,11 @@ class UsersController < ApplicationController
 
   def correct_user_without_admin
     @user = User.find(params[:id])
-    redirect_to user_path(current_user) unless @user == current_user || current_user.admin == true
+    if user_signed_in?
+      redirect_to user_path(current_user) unless @user == current_user || current_user.admin == true
+    else
+      redirect_to users_path
+    end
   end
 
   def ensure_guest_user

@@ -338,6 +338,7 @@ $(document).on('change', '.prefecture_select', function(){
     }
 
   } else {
+    $('.area_select').val('');
     $('.area_select').css('display', 'none');
   }
 

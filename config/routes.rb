@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   root to: 'homes#top'
   get 'about' => 'homes#about'
 
-  resources :users, only: [:index, :show, :edit, :update] do
+  resources :users, only: [:index, :show, :edit, :update, :destroy] do
     collection do
       get ':id/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
     end

@@ -10,11 +10,14 @@
         <%= f.text_field :title, class: "form-control" %>
         <%= f.label :title, "説明" %>
         <%= f.text_area :body, class: "form-control" %>
+        <%= f.collection_select(:category_id, Category.all, :id, :name, {include_blank: "カテゴリー選択"}, {class: "form-select"} ) %>
+        <%= f.collection_select(:prefecture, Prefecture.all, :id, :name, {include_blank: "都道府県選択"}, {class: "form-select prefecture_select"} ) %>
+        <%= f.collection_select(:area_id, Area.all, :id, :name, {include_blank: "エリア選択"}, {class: "form-select area_select"} ) %>
         <%= f.submit "保存する", class: "btn btn-outline-success" %>
       <% end %>
     </div>
     <div class="col">
-      <%= link_to '削除する', post_path, method: :destroy, class: "btn btn-outline-danger" %>
+      <%= link_to '削除する', post_path, method: :delete, class: "btn btn-outline-danger" %>
     </div>
   </div>
 </div>

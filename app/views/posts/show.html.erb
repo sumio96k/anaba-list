@@ -1,26 +1,66 @@
 <h1>投稿詳細ページ</h1>
 <div class="container">
-  <div class="row">
-    <div class="col">
+  <div class="row justify-content-around">
+    <div class="col-5">
       <%= image_tag @post.get_image(400,400) %>
     </div>
-    <div class="col">
+    <div class="col-6">
       <div class="row">
-        <%= @post.title %>
-      </div>
-      <div class="row">
-        <%= @post.body %>
+        <div class="col-12 border">
+          <%= @post.title %>
+        </div>
+        <div class="col-12">
+          #<%= @prefecture.name %>
+        </div>
+        <div class="col-12">
+          #<%= @post.area.name %>
+        </div>
+        <div class="col-12">
+          #<%= @post.category.name %>
+        </div>
+        <% @post_tag.each do |tag| %>
+          <div class="col">
+            #<%= tag.name %>
+          </div>
+        <% end %>
+        <div class="col-12 border">
+          <%= @post.body %>
+        </div>
       </div>
     </div>
-    <% if @post.user == current_user || current_user.admin? %>
-    <div class="col-2">
-      <%= link_to '編集画面へ', edit_post_path, class: "btn btn-outline-info" %>
-    </div>
+    <% if user_signed_in? %>
+      <% if @post.user == current_user || current_user.admin == true %>
+      <div class="col-2">
+        <%= link_to '編集画面へ', edit_post_path, class: "btn btn-outline-info" %>
+      </div>
+      <% end %>
     <% end %>
   </div>
-  <div class="row">
+
     <% @post_comments.each do |post_comment| %>
-      <%= post_comment.comment %>
+    <div class="row mt-1">
+      <div class="col-6"><%= post_comment.comment %></div>
+      <div class="col-2"> by <%= post_comment.user.name %></div>
+      <div class="col-2">
+        <% if user_signed_in? %>
+          <% if post_comment.user == current_user || current_user.admin == true %>
+            <%= link_to post_post_comment_path(@post.id), method: :delete do %>
+              <i class="fas fa-trash"></i>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+      </div>
     <% end %>
+
+  <div class="row mt-3">
+    <div class="col-4">
+      <%= form_with model: [@post, @post_comment], url: post_post_comments_path(@post.id), method: :post do |f| %>
+      <%= f.text_area :comment, class: "form-control" %>
+    </div>
+    <div class="col-2">
+      <%= f.submit 'コメント投稿', class: "btn btn-primary" %>
+      <% end %>
+    </div>
   </div>
 </div>

@@ -11,9 +11,19 @@
           <div class="navbar-collapse collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
               <% if user_signed_in? %>
+                <% if current_user.admin? %>
+                  <%= link_to users_path, class: 'nav-link text-dark' do %>
+                    <i class="fas fa-users"></i> Users
+                  <% end %>
+                <% end %>
+                <li>
+                  <%= link_to new_post_path, class: 'nav-link text-dark' do %>
+                  <i class="fas fa-camera"></i> New Post
+                  <% end %>
+                </li>
                 <li>
                   <%= link_to user_path(current_user.id), class: 'nav-link text-dark' do %>
-                  <i class="fas fa-home"></i> My Page
+                  <i class="fas fa-user"></i> My Page
                   <% end %>
                 </li>
 
