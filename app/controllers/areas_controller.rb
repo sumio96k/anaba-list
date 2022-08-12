@@ -1,9 +1,10 @@
 class AreasController < ApplicationController
 
   def index
-    @prefectures = Prefecture.all
-    @areas = Area.all
+
   end
   def show
+    @area = Area.find(params[:id])
+    @posts = @area.posts
   end
 end

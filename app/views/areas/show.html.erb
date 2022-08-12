@@ -1,2 +1,22 @@
-<h1>Areas#show</h1>
-<p>Find me in app/views/areas/show.html.erb</p>
+<!--エリア詳細ページ-->
+<div class="container">
+  <h2><%= @area.name %>の投稿一覧</h2>
+    <% for category_id in Category.ids do %>
+
+      <div class="row mb-3">
+        <h4><%= link_to Category.find_by(id: category_id).name, category_path %></h4>
+      </div>
+
+      <div class="row justify-content-start mb-3">
+        <% @posts.where(category_id: category_id).limit(12).order(id: "DESC").each do |post| %>
+        <div class="col col-sm-3">
+          <%= link_to post_path(post) do %>
+            <%= image_tag post.get_image(200,200) %>
+          <% end %>
+        </div>
+        <% end %>
+      </div>
+
+    <% end %>
+
+</div>

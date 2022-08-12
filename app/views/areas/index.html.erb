@@ -1,12 +1,12 @@
 <h1>エリア一覧ページ</h1>
 <div class="container">
-  <% for prefecture_id in @prefectures.ids do %>
-  <div class="row">
-    <%= @prefectures.find_by(id: prefecture_id).name %>
+  <% for prefecture_id in Prefecture.ids do %>
+  <div class="row my-2">
+    <strong><%= link_to Prefecture.get_prefecture(prefecture_id).name, prefecture_path(prefecture_id) %></strong>
   </div>
-  <div class="row">
+  <div class="row mx-auto">
     <% Area.where(prefecture_id: prefecture_id).each do |area| %>
-      <%= area.name %>
+        <span class="pr-2"><%= link_to area.name, area_path(area.id) %>/</span>
     <% end %>
   </div>
   <% end %>

@@ -6,7 +6,7 @@
       <%= link_to post_path(post.id) do %>
         <%= image_tag post.get_image(200,200) %><br>
       <% end %>
-        都道府県: <%= link_to Prefecture.get_prefecture(post).name, prefecture_path(post.area.prefecture_id) %><br>
+        都道府県: <%= link_to Prefecture.get_prefecture(post.area.prefecture_id).name, prefecture_path(post.area.prefecture_id) %><br>
         エリア: <%= link_to post.area.name, area_path(post.area.id) %><br>
         カテゴリー: <%= link_to post.category.name, category_path(post.category_id) %>
     </div>
