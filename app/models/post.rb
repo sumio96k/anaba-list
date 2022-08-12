@@ -8,6 +8,7 @@ class Post < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
+  has_many :favorites, dependent: :destroy
 
 
   def get_image(width, height)
@@ -36,5 +37,9 @@ class Post < ApplicationRecord
       new_post_tag = Tag.find_or_create_by(name: new)
       self.tags << new_post_tag
     end
+  end
+
+  def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
   end
 end

@@ -167,4 +167,6 @@ self.data = [
 
   include ActiveHash::Associations
   has_many :posts
+
+
 end

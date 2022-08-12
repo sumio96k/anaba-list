@@ -3,6 +3,7 @@ class PostCommentsController < ApplicationController
     post = Post.find(params[:post_id])
     comment = PostComment.new(post_comment_params)
     comment.user_id = current_user.id
+    # binding.pry
     comment.post_id = post.id
     comment.save
     redirect_to post_path(post.id)
@@ -14,6 +15,6 @@ class PostCommentsController < ApplicationController
   end
 
   def post_comment_params
-    params.require(:post_comment).permit(:comment)
+    params.require(:post_comment).permit(:comment, :rate)
   end
 end

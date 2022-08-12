@@ -1,6 +1,7 @@
-<h1>投稿詳細ページ</h1>
+<h1 id="button">投稿詳細ページ</h1>
 <div class="container">
 
+  <!--投稿詳細-->
   <div class="row justify-content-around">
     <div class="col-5">
       <%= image_tag @post.get_image(400,400) %>
@@ -11,10 +12,10 @@
           <%= @post.title %>
         </div>
         <div class="col-12">
-          #<%= @prefecture.name %>
+          都道府県: <%= @prefecture.name %>
         </div>
         <div class="col-12">
-          #<%= @post.area.name %>
+          エリア: <%= @post.area.name %>
         </div>
         <div class="col-12">
           #<%= @post.category.name %>
@@ -27,6 +28,11 @@
         <div class="col-12 border">
           <%= @post.body %>
         </div>
+        <div>
+          <% if user_signed_in? %>
+            <%= render 'favorites/btn', post: @post %>
+          <% end %>
+        </div>
       </div>
     </div>
     <% if user_signed_in? %>
@@ -38,14 +44,27 @@
     <% end %>
   </div>
 
-  <div class="row row-cols-3 mt-1">
+  <!--コメント一覧-->
+  <div class="row row-cols-4 mt-1">
     <% @post_comments.each do |post_comment| %>
       <div class="col"><%= post_comment.comment %></div>
+      <div class="col" id="star-rate<%= post_comment.id%>"></div>
+        <script>
+          $('#star-rate<%= post_comment.id%>').raty({
+            size      : 36,
+            starOff   : '<%= asset_path('star-off.png') %>',
+            starOn    : '<%= asset_path('star-on.png') %>',
+            starHalf : '<%= asset_path('star-half.png') %>',
+            half      : true,
+            readOnly: true,
+            score: <%= post_comment.rate %>,
+          });
+        </script>
       <div class="col"> by <%= post_comment.user.name %></div>
       <div class="col">
         <% if user_signed_in? %>
           <% if post_comment.user == current_user || current_user.admin == true %>
-            <%= link_to post_post_comment_path(@post.id), method: :delete do %>
+            <%= link_to post_post_comment_path(@post, post_comment), method: :delete do %>
               <i class="fas fa-trash"></i>
             <% end %>
           <% end %>
@@ -54,29 +73,40 @@
     <% end %>
   </div>
 
-  <div class="row mt-3">
-    <div class="col-4">
-      <%= form_with model: [@post, @post_comment], url: post_post_comments_path(@post.id), method: :post do |f| %>
-      <%= f.text_area :comment, class: "form-control" %>
+  <!--コメント投稿-->
+  <% if user_signed_in? %>
+    <div class="row mt-3">
+      <div class="col-4">
+        <%= form_with(model: [@post,@post_comment], url: post_post_comments_path(@post.id), local: true) do |f| %>
+
+        <%#binding.pry%>
+        <%= f.text_area :comment, class: "form-control" %>
+      </div>
+
+      <!--評価-->
+      <div class="form-group" id="star">
+        <%= f.label :rate,'評価 ', class:'col-form-label' %>
+        <%= f.hidden_field :rate, id: :review_star %>
+        <%#= f.hidden_field :rate, :value => 'score' %>
+      </div>
+      <!-- 評価javascript -->
+      <script>
+        $('#star').raty({
+          size     : 36,
+          starOff:  '<%= asset_path('star-off.png') %>',
+          starOn : '<%= asset_path('star-on.png') %>',
+          starHalf: '<%= asset_path('star-half.png') %>',
+          scoreName: 'post_comment[rate]',
+          half: true,
+        });
+      </script>
+
+      <div class="col-2">
+        <%= f.submit 'コメント投稿', class: "btn btn-primary" %>
+        <% end %>
+      </div>
+
     </div>
-    <div class="col-3" id="star">
-      <%= f.hidden_field :star, id: :review_star %>
-    </div>
-    <!-- 評価javascript -->
-    <script>
-      $('#star').raty({
-        size     : 36,
-        starOff:  '<%= asset_path('star-off.png') %>',
-        starOn : '<%= asset_path('star-on.png') %>',
-        starHalf : '<%= asset_path('star-half.png') %>',
-        scoreName: 'comment[star]',
-        half: true,
-      });
-    </script>
-    <div class="col-2">
-      <%= f.submit 'コメント投稿', class: "btn btn-primary" %>
-      <% end %>
-    </div>
-  </div>
+  <% end %>
 
 </div>

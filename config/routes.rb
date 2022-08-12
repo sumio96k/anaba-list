@@ -20,8 +20,9 @@ Rails.application.routes.draw do
     resources :post_comments, only: [:create, :destroy]
     resource :favorites, only: [:create, :destroy]
   end
+  get 'favorites' => 'favorites#index'
 
-  get 'favorites' => 'users#index'
+
 
   resources :areas, only: [:index,:show]
   resources :prefectures, only: [:index, :show]

@@ -20,5 +20,8 @@ class Prefecture < ActiveHash::Base
   include ActiveHash::Associations
   has_many :areas
 
+  def self.get_prefecture(post)
+    Prefecture.find_by(id: post.area.prefecture_id)
+  end
 
 end

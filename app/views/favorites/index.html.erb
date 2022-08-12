@@ -1,2 +1,19 @@
-<h1>Favorites#index</h1>
-<p>Find me in app/views/favorites/index.html.erb</p>
+<div class="container">
+  <div class="row justify-content-center mb-3">
+    <h3>マイリストページ</h3>
+  </div>
+  <div class="row row-cols-2">
+    <% @favorite_lists.each do |favorite_list| %>
+    <div class="col">
+      <div>
+        <%= link_to post_path(favorite_list.id) do %>
+          <%= image_tag favorite_list.get_image(400,400) %>
+        <% end %>
+      </div>
+      <div>
+        <%= favorite_list.title %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

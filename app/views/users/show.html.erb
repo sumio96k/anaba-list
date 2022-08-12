@@ -1,5 +1,6 @@
 <h1>ユーザー詳細画面</h1>
 <div class="container">
+
   <div class="row justify-content-around">
     <div class="col-3 border rounded">
       <%= image_tag @user.get_profile_image(300,300) %>
@@ -19,17 +20,17 @@
       </div>
       <% end %>
     <% end %>
-
+  </div>
+  <div class="row">
+    <%= link_to 'マイリスト', favorites_path %>
   </div>
   <div class="row mt-3">
     <% @posts.each do |post| %>
     <div class ="mx-3">
-      <div>
         <%= image_tag post.get_image(200,200) %><br>
-        #<%= @prefectures.find_by(id: post.area.prefecture_id).name %><br>
-        #<%= post.area.name %><br>
+        都道府県: <%= @prefectures.find_by(id: post.area.prefecture_id).name %><br>
+        エリア: <%= post.area.name %><br>
         #<%= post.category.name %>
-      </div>
     </div>
     <% end %>
   </div>

@@ -14,6 +14,7 @@ class PostsController < ApplicationController
     @post_tag = @post.tags
     @post_comment = PostComment.new
     @post_comments = @post.post_comments
+    @favorite = Favorite.new
   end
 
   def edit
@@ -67,4 +68,6 @@ class PostsController < ApplicationController
       redirect_to posts_path
     end
   end
+
+
 end

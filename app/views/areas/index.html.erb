@@ -1,1 +1,13 @@
 <h1>エリア一覧ページ</h1>
+<div class="container">
+  <% for prefecture_id in @prefectures.ids do %>
+  <div class="row">
+    <%= @prefectures.find_by(id: prefecture_id).name %>
+  </div>
+  <div class="row">
+    <% Area.where(prefecture_id: prefecture_id).each do |area| %>
+      <%= area.name %>
+    <% end %>
+  </div>
+  <% end %>
+</div>

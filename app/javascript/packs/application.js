@@ -16,8 +16,12 @@ import '@fortawesome/fontawesome-free/js/all'
 import "scripts/areas.js"
 
 window.$ = window.jQuery = require('jquery');
-require('packs/raty')
+import './raty'
+// require('packs/raty')
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+
+
