@@ -1,2 +1,21 @@
-<h1>Categories#show</h1>
-<p>Find me in app/views/categories/show.html.erb</p>
+<!--カテゴリー詳細ページ-->
+<div class="container">
+  <div class="row justify-content-center mb-3">
+    <% if @prefecture_or_area.class.name == "Prefecture" %>
+      <h4><%= @prefecture_or_area.name %>のカテゴリー：<%= @category.name %> の投稿一覧</h4>
+    <% elsif @prefecture_or_area.class.name == "Area" %>
+      <h4><%= @prefecture_or_area.name %>エリアのカテゴリー：<%= @category.name %> の投稿一覧</h4>
+    <% else %>
+      <h4>すべての<%= @category.name %> の投稿一覧</h4>
+    <% end %>
+  </div>
+  <div class="row row-cols-4">
+    <% @posts.each do |post| %>
+    <div class="col">
+      <%= link_to post_path(post.id) do %>
+        <%= image_tag post.get_image(200,200) %>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+</div>

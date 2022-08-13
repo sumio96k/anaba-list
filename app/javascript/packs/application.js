@@ -15,8 +15,11 @@ import "../stylesheets/application"
 import '@fortawesome/fontawesome-free/js/all'
 import "scripts/areas.js"
 
+console.log("res")
+
 window.$ = window.jQuery = require('jquery');
 import './raty'
+
 // require('packs/raty')
 
 Rails.start()

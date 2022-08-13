@@ -20,6 +20,7 @@
 }(this, function($) {
   'use strict';
 
+
   $.raty = {
     cancelButton: false,
     cancelClass:  'raty-cancel',
@@ -775,3 +776,7 @@
     return Raty;
   })();
 }));
+
+
+
+

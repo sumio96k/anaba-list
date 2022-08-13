@@ -76,18 +76,18 @@
   <!--コメント投稿-->
   <% if user_signed_in? %>
     <div class="row mt-3">
-      <div class="col-4">
         <%= form_with(model: [@post,@post_comment], url: post_post_comments_path(@post.id), local: true) do |f| %>
+      <div class="col-4">
 
         <%#binding.pry%>
         <%= f.text_area :comment, class: "form-control" %>
+
       </div>
 
       <!--評価-->
       <div class="form-group" id="star">
-        <%= f.label :rate,'評価 ', class:'col-form-label' %>
+        <%= f.label :star, '評価', class:'col-form-label' %>
         <%= f.hidden_field :rate, id: :review_star %>
-        <%#= f.hidden_field :rate, :value => 'score' %>
       </div>
       <!-- 評価javascript -->
       <script>
@@ -103,8 +103,8 @@
 
       <div class="col-2">
         <%= f.submit 'コメント投稿', class: "btn btn-primary" %>
-        <% end %>
       </div>
+      <% end %>
 
     </div>
   <% end %>
