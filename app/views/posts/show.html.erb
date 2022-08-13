@@ -1,112 +1,63 @@
-<h1 id="button">投稿詳細ページ</h1>
+<!--投稿詳細ページ-->
 <div class="container">
-
-  <!--投稿詳細-->
-  <div class="row justify-content-around">
-    <div class="col-5">
-      <%= image_tag @post.get_image(400,400) %>
+  <div class="row mb-3">
+    <div class="col-2">
+    <%= link_to user_path(@post.user.id) do %>
+      <%= image_tag @post.user.get_profile_image(100,100) %>
+    <% end %>
     </div>
-    <div class="col-6">
-      <div class="row">
-        <div class="col-12 border">
-          <%= @post.title %>
-        </div>
-        <div class="col-12">
-          都道府県: <%= @prefecture.name %>
-        </div>
-        <div class="col-12">
-          エリア: <%= @post.area.name %>
-        </div>
-        <div class="col-12">
-          #<%= @post.category.name %>
-        </div>
-        <% @post_tag.each do |tag| %>
-          <div class="col">
-            #<%= tag.name %>
-          </div>
-        <% end %>
-        <div class="col-12 border">
-          <%= @post.body %>
-        </div>
-        <div>
-          <% if user_signed_in? %>
-            <%= render 'favorites/btn', post: @post %>
-          <% end %>
-        </div>
+    <div class="col">
+      <%= @post.user.name %>
+    </div>
+  </div>
+  <!--投稿詳細-->
+  <div class="row">
+    <div class="col-8">
+      <div>
+        <%= image_tag @post.get_image(600,600) %>
       </div>
+      <div>
+        <%= @post.title %>
+      </div>
+      <div>
+        都道府県: <%= @prefecture.name %>
+        エリア: <%= @post.area.name %>
+        カテゴリー：<%= @post.category.name %>
+      </div>
+      <div>
+        <%= @post.body %>
+        <% @post_tag.each do |tag| %>
+        #<%= tag.name %>
+        <% end %>
+      </div>
+
+      <% if user_signed_in? %>
+        <%= render 'favorites/btn', post: @post %>
+      <% else %>
+        <%= link_to new_user_session_path do %>
+          <i class="far fa-heart fa-2x" style="color: red;"></i>
+          <span><%= @post.favorites.count %> いいね</span>
+        <% end %>
+      <% end %>
     </div>
     <% if user_signed_in? %>
       <% if @post.user == current_user || current_user.admin == true %>
-      <div class="col-2">
         <%= link_to '編集画面へ', edit_post_path, class: "btn btn-outline-info" %>
-      </div>
       <% end %>
     <% end %>
-  </div>
-
   <!--コメント一覧-->
-  <div class="row row-cols-4 mt-1">
-    <% @post_comments.each do |post_comment| %>
-      <div class="col"><%= post_comment.comment %></div>
-      <div class="col" id="star-rate<%= post_comment.id%>"></div>
-        <script>
-          $('#star-rate<%= post_comment.id%>').raty({
-            size      : 36,
-            starOff   : '<%= asset_path('star-off.png') %>',
-            starOn    : '<%= asset_path('star-on.png') %>',
-            starHalf : '<%= asset_path('star-half.png') %>',
-            half      : true,
-            readOnly: true,
-            score: <%= post_comment.rate %>,
-          });
-        </script>
-      <div class="col"> by <%= post_comment.user.name %></div>
-      <div class="col">
-        <% if user_signed_in? %>
-          <% if post_comment.user == current_user || current_user.admin == true %>
-            <%= link_to post_post_comment_path(@post, post_comment), method: :delete do %>
-              <i class="fas fa-trash"></i>
-            <% end %>
-          <% end %>
-        <% end %>
-      </div>
-    <% end %>
+  <div class="col-3">
+    <%= render 'post_comments/index', post_comments: @post_comments, post: @post %>
   </div>
+</div>
 
-  <!--コメント投稿-->
-  <% if user_signed_in? %>
-    <div class="row mt-3">
-        <%= form_with(model: [@post,@post_comment], url: post_post_comments_path(@post.id), local: true) do |f| %>
-      <div class="col-4">
-
-        <%#binding.pry%>
-        <%= f.text_area :comment, class: "form-control" %>
-
-      </div>
-
-      <!--評価-->
-      <div class="form-group" id="star">
-        <%= f.label :star, '評価', class:'col-form-label' %>
-        <%= f.hidden_field :rate, id: :review_star %>
-      </div>
-      <!-- 評価javascript -->
-      <script>
-        $('#star').raty({
-          size     : 36,
-          starOff:  '<%= asset_path('star-off.png') %>',
-          starOn : '<%= asset_path('star-on.png') %>',
-          starHalf: '<%= asset_path('star-half.png') %>',
-          scoreName: 'post_comment[rate]',
-          half: true,
-        });
-      </script>
-
-      <div class="col-2">
-        <%= f.submit 'コメント投稿', class: "btn btn-primary" %>
-      </div>
-      <% end %>
-
+<!--コメント投稿-->
+<% if user_signed_in? %>
+  <div class="row mt-3">
+    <div class="col">
+      <%= render 'post_comments/form', post: @post, post_comment: @post_comment %>
     </div>
-  <% end %>
+  </div>
+<% end %>
 
 </div>

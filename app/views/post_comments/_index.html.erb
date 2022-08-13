@@ -1,0 +1,26 @@
+<% post_comments.each do |post_comment| %>
+      <div class="col"><%= post_comment.comment %></div>
+      <div class="col" id="star-rate<%= post_comment.id%>"></div>
+        <script>
+          $('#star-rate<%= post_comment.id %>').empty();
+          $('#star-rate<%= post_comment.id%>').raty({
+            size      : 36,
+            starOff   : '<%= asset_path('star-off.png') %>',
+            starOn    : '<%= asset_path('star-on.png') %>',
+            starHalf : '<%= asset_path('star-half.png') %>',
+            half      : true,
+            readOnly: true,
+            score: <%= post_comment.rate %>,
+          });
+        </script>
+      <div class="col"> by <%= post_comment.user.name %></div>
+      <div class="col">
+        <% if user_signed_in? %>
+          <% if post_comment.user == current_user || current_user.admin == true %>
+            <%= link_to post_post_comment_path(post, post_comment), method: :delete do %>
+              <i class="fas fa-trash" style="color: gray;"></i>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>

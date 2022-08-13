@@ -3,23 +3,6 @@
   <div class="row justify-content-center">
     <h2><%= @prefecture.name %>の投稿一覧</h2>
   </div>
-    <% for category_id in @categories.ids do %>
-
-      <div class="row mb-3">
-        カテゴリー：<%= link_to @categories.find_by(id: category_id).name, category_path(id: category_id, second_id: @prefecture.id, key: @prefecture.class.name) %>
-      </div>
-
-      <div class="row justify-content-start mb-3">
-        <% @posts.where(category_id: category_id).limit(12).order(id: "DESC").each do |post| %>
-        <div class="col col-sm-3">
-          <%= link_to post_path(post) do %>
-            <%= image_tag post.get_image(200,200) %>
-          <% end %>
-        </div>
-        <% end %>
-      </div>
-
-    <% end %>
-
+    <%= render 'common/show', categories: @categories, obj: @prefecture, posts: @posts %>
 </div>
 

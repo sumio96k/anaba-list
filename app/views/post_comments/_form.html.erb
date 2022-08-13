@@ -1,0 +1,28 @@
+<%= form_with(model: [post,post_comment], url: post_post_comments_path(post.id), local: true) do |f| %>
+  <div class="col-6">
+    <%= f.text_area :comment, placeholder: "コメントを入力してください", class: "form-control" %>
+  </div>
+
+  <!--評価-->
+  <div class="col" id="star">
+    <%= f.label :star,'評価', class:'col-form-label' %>
+    <%= f.hidden_field :rate, id: :review_star %>
+  </div>
+  <!-- 評価javascript -->
+  <script>
+    $('#star').empty();
+    $('#star').raty({
+      size     : 36,
+      starOff:  '<%= asset_path('star-off.png') %>',
+      starOn : '<%= asset_path('star-on.png') %>',
+      starHalf: '<%= asset_path('star-half.png') %>',
+      scoreName: 'post_comment[rate]',
+      half: true,
+    });
+  </script>
+
+  <div class="col-12">
+    <%= f.submit 'コメント投稿', class: "btn btn-primary" %>
+  </div>
+<% end %>
+
