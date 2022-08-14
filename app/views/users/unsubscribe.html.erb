@@ -25,7 +25,7 @@
       <%= link_to "戻る", edit_user_path(@user.id), class: "btn btn-outline-secondary" %>
     </div>
     <div class="col-2">
-      <%= link_to "退会させる", withdraw_path(@user.id), method: :patch, class: "btn btn-outline-danger" %>
+      <%= link_to "退会させる", admin_withdraw_path(@user.id), method: :patch, class: "btn btn-outline-danger" %>
     </div>
   </div>
   <% end %>

@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    #<%= @content %> の投稿一覧
+  </div>
+  <div class="row">
+    <% @tag_posts.each do |post| %>
+    <div class="col">
+      <%= link_to post_path(post.id) do %>
+        <%= image_tag post.get_image(200,200) %>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+</div>

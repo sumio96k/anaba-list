@@ -1,4 +1,4 @@
-<%= form_with(model: [post,post_comment], url: post_post_comments_path(post.id), local: true) do |f| %>
+<%= form_with(model: [post,post_comment], url: post_post_comments_path(post.id), local: false) do |f| %>
   <div class="col-6">
     <%= f.text_area :comment, placeholder: "コメントを入力してください", class: "form-control" %>
   </div>

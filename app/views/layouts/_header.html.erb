@@ -12,9 +12,16 @@
             <ul class="navbar-nav ml-auto">
               <% if user_signed_in? %>
                 <% if current_user.admin? %>
-                  <%= link_to users_path, class: 'nav-link text-dark' do %>
-                    <i class="fas fa-users"></i> Users
-                  <% end %>
+                  <li>
+                    <%= link_to admin_users_path, class: 'nav-link text-dark' do %>
+                      <i class="fas fa-users" style="color: red;"></i> 退会させたユーザー
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= link_to users_path, class: 'nav-link text-dark' do %>
+                      <i class="fas fa-users"></i> Users
+                    <% end %>
+                  </li>
                 <% end %>
                 <li>
                   <%= link_to new_post_path, class: 'nav-link text-dark' do %>

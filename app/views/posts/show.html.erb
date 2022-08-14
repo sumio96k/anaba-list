@@ -20,19 +20,28 @@
         <%= @post.title %>
       </div>
       <div>
-        都道府県: <%= @prefecture.name %>
-        エリア: <%= @post.area.name %>
-        カテゴリー：<%= @post.category.name %>
+        <div>
+          都道府県: <%= link_to @prefecture.name, prefecture_path(@prefecture.id) %>
+          エリア: <%= link_to  @post.area.name, area_path(@post.area.id) %>
+        </div>
+        <div>
+          カテゴリー：<%= @post.category.name %>
+        </div>
       </div>
       <div>
-        <%= @post.body %>
-        <% @post_tag.each do |tag| %>
-        #<%= tag.name %>
-        <% end %>
+        <div>
+          <%= @post.body %>
+        </div>
+        <div>
+          <% @post_tag.each do |tag| %>
+          #<%= link_to tag.name, tag_search_path(content: tag.name) %>
+          <% end %>
+        </div>
       </div>
-
       <% if user_signed_in? %>
+      <div class="favorite_<%= @post.id %>">
         <%= render 'favorites/btn', post: @post %>
+      </div>
       <% else %>
         <%= link_to new_user_session_path do %>
           <i class="far fa-heart fa-2x" style="color: red;"></i>
@@ -45,19 +54,19 @@
         <%= link_to '編集画面へ', edit_post_path, class: "btn btn-outline-info" %>
       <% end %>
     <% end %>
-  <!--コメント一覧-->
-  <div class="col-3">
-    <%= render 'post_comments/index', post_comments: @post_comments, post: @post %>
-  </div>
-</div>
-
-<!--コメント投稿-->
-<% if user_signed_in? %>
-  <div class="row mt-3">
-    <div class="col">
-      <%= render 'post_comments/form', post: @post, post_comment: @post_comment %>
+    <!--コメント一覧-->
+    <div class="col-3 post_comments_index">
+      <%= render 'post_comments/index', post_comments: @post_comments, post: @post %>
     </div>
   </div>
-<% end %>
+
+  <!--コメント投稿-->
+  <% if user_signed_in? %>
+    <div class="row mt-3">
+      <div class="col">
+        <%= render 'post_comments/form', post: @post, post_comment: @post_comment %>
+      </div>
+    </div>
+  <% end %>
 
 </div>

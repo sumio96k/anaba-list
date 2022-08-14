@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'searches/tags_search'
   devise_for :users
   devise_scope :user do
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
@@ -22,11 +23,17 @@ Rails.application.routes.draw do
   end
   get 'favorites' => 'favorites#index'
 
+  get 'tag_search' => 'searches#tags_search'
 
 
   resources :areas, only: [:index,:show]
   resources :prefectures, only: [:index, :show]
   resources :categories, only: [:index, :show]
+
+  namespace :admin do
+    resources :users, only: [:index]
+    patch ':id/withdraw' => 'users#withdraw', as: 'withdraw'
+  end
 
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

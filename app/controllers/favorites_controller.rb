@@ -6,19 +6,19 @@ class FavoritesController < ApplicationController
   end
 
   def create
-    post = Post.find(params[:post_id])
+    #非同期通信
+    @post = Post.find(params[:post_id])
     favorite = Favorite.new
     favorite.user_id = current_user.id
-    favorite.post_id = post.id
+    favorite.post_id = @post.id
     favorite.save
-    redirect_to post_path(post.id)
   end
 
   def destroy
-    post = Post.find(params[:post_id])
-    favorite = current_user.favorites.find_by(params[post_id: post.id])
+    #非同期通信
+    @post = Post.find(params[:post_id])
+    favorite = current_user.favorites.find_by(params[post_id: @post.id])
     favorite.destroy
-    redirect_to post_path(post.id)
   end
 
 end
