@@ -1,3 +1,18 @@
-<% @deleted_users.each do |deleted_user| %>
-  <%= image_tag deleted_user.get_profile_image(200,200) %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h3>違反ユーザー一覧</h3>
+    </div>
+    <% @deleted_users.each do |deleted_user| %>
+      <div class="col">
+        <%= image_tag deleted_user.get_profile_image(200,200) %>
+      </div>
+      <div class="col">
+        名前：<%= deleted_user.name %>
+      </div>
+      <div class="col">
+        退会理由：<%= deleted_user.admin_memo %>
+      </div>
+    <% end %>
+  </div>
+</div>
