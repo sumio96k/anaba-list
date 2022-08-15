@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   get 'favorites' => 'favorites#index'
 
   get 'tag_search' => 'searches#tags_search'
-
+  get 'search' => 'searches#search'
 
   resources :areas, only: [:index,:show]
   resources :prefectures, only: [:index, :show]

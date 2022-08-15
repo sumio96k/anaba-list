@@ -3,7 +3,8 @@ class UsersController < ApplicationController
   before_action :ensure_guest_user, only: [:edit]
 
   def index
-    @users = all_users_without_admin_deleted
+    users = User.all
+    @users = User.users_without_admin_deleted(users)
   end
 
   def show
@@ -67,9 +68,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def all_users_without_admin_deleted
-    User.all - User.where(admin: true) - User.where(is_deleted: true)
-  end
+
 
 
 end

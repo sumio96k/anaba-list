@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :posts
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  
+
 
   def get_profile_image(width, height)
     unless profile_image.attached?
@@ -18,10 +18,19 @@ class User < ApplicationRecord
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
 
+  #管理者と退会済のユーザー以外の情報を取得
+  def self.users_without_admin_deleted(users)
+    users - User.where(admin: true) - User.where(is_deleted: true)
+  end
+
   def self.guest
     find_or_create_by!(name: 'guestuser' ,email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
       user.name = "guestuser"
     end
+  end
+
+  def self.search_for(content)
+    users = User.where("name LIKE?", "%#{content}%")
   end
 end

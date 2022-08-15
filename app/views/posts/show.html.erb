@@ -34,7 +34,7 @@
         </div>
         <div>
           <% @post_tag.each do |tag| %>
-          #<%= link_to tag.name, tag_search_path(content: tag.name) %>
+          #<%= link_to tag.name, search_path(content: tag.name, model: "Tag") %>
           <% end %>
         </div>
       </div>

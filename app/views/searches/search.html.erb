@@ -1,0 +1,21 @@
+<div class="container">
+
+  <% if @posts.nil? != true %>
+  <div class="row">
+    <h3>『<%= @content %>』の投稿検索結果</h3>
+  </div>
+  <div class="row">
+    <%= render 'posts/index', posts: @posts %>
+  </div>
+  <% end %>
+
+  <% if @users.nil? != true %>
+  <div class="row">
+    <h3>『<%= @content %>』のユーザー検索結果</h3>
+  </div>
+  <div class="row">
+    <%= render 'users/index', users: @users %>
+  </div>
+  <% end %>
+
+</div>

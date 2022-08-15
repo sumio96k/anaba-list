@@ -10,6 +10,7 @@
           </button>
           <div class="navbar-collapse collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
+              <li><%= render 'searches/form' %></li>
               <% if user_signed_in? %>
                 <% if current_user.admin? %>
                   <li>
