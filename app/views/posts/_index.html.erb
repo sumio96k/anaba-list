@@ -1,10 +1,14 @@
 <% posts.each do |post| %>
-  <div class="col-3 mb-2 border">
-    <%= link_to post_path(post.id) do %>
-      <%= image_tag post.get_image(200,200) %><br>
-    <% end %>
-      都道府県: <%= link_to Prefecture.get_prefecture(post.area.prefecture_id).name, prefecture_path(post.area.prefecture_id) %><br>
-      エリア: <%= link_to post.area.name, area_path(post.area.id) %><br>
-      カテゴリー: <%= link_to post.category.name, category_path(post.category_id) %>
+  <div class="col">
+    <div class="card h-100">
+      <%= link_to post_path(post.id) do %>
+        <%= image_tag post.get_image(200,200), class: "card-img-top" %>
+      <% end %>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">都道府県: <%= link_to Prefecture.get_prefecture(post.area.prefecture_id).name, prefecture_path(post.area.prefecture_id) %></li>
+        <li class="list-group-item">エリア: <%= link_to post.area.name, area_path(post.area.id) %></li>
+        <li class="list-group-item">カテゴリー: <%= link_to post.category.name, category_path(post.category_id) %></li>
+      </ul>
+    </div>
   </div>
 <% end %>
