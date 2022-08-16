@@ -1,11 +1,11 @@
-<h1>ユーザー詳細画面</h1>
+<!--ユーザー詳細-->
 <div class="container">
 
   <div class="row justify-content-around">
-    <div class="col-3 border rounded">
-      <%= image_tag @user.get_profile_image(300,300) %>
+    <div class="col-3">
+      <%= image_tag @user.get_profile_image, size: "400x400", class: "rounded-circle" %>
     </div>
-    <div class="col-5 border rounded">
+    <div class="col-5">
       <%= @user.introduction %>
     </div>
     <% if user_signed_in? %>
@@ -27,7 +27,7 @@
   <div class="row mt-3">
     <% @posts.each do |post| %>
     <div class ="mx-3">
-        <%= image_tag post.get_image(200,200) %><br>
+        <%= image_tag post.get_image, size: "200x200" %><br>
         都道府県: <%= @prefectures.find_by(id: post.area.prefecture_id).name %><br>
         エリア: <%= post.area.name %><br>
         #<%= post.category.name %>

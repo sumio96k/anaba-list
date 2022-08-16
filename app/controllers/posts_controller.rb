@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-
   before_action :correct_user_without_admin, only: [:edit, :update, :destroy]
 
   def index
@@ -9,11 +8,13 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @post_comments = @post.post_comments
     @prefecture = Prefecture.find_by(id: @post.area.prefecture_id)
     @post_tag = @post.tags
     @post_comment = PostComment.new
     @post_comments = @post.post_comments
+    #レビューの平均値を求める
+    rates = @post_comments.pluck(:rate)
+    @rate_average = rates.sum.fdiv(rates.length)
     @favorite = Favorite.new
   end
 

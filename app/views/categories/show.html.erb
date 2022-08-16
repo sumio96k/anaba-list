@@ -13,7 +13,7 @@
     <% @posts.each do |post| %>
     <div class="col">
       <%= link_to post_path(post.id) do %>
-        <%= image_tag post.get_image(200,200) %>
+        <%= image_tag post.get_image %>
       <% end %>
     </div>
     <% end %>

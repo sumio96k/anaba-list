@@ -1,59 +1,73 @@
 <!--投稿詳細ページ-->
 <div class="container">
   <!--投稿詳細-->
-  <div class="row">
-    <div class="col-12">
-    <%= link_to user_path(@post.user.id) do %>
-      <%= image_tag @post.user.get_profile_image(100,100) %>
-    <% end %>
+  <div class="row justify-content-around">
+    <div class="col-md-7">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-2">
+              <%= link_to user_path(@post.user.id) do %>
+                <%= image_tag @post.user.get_profile_image, size: "64x64", class: "rounded-circle" %>
+              <% end %>
+            </div>
+            <div class="col-9">
+                <p><%= @post.user.name %></p>
+                <p><%= @post.address %></p>
+            </div>
+          </div>
+        </div>
+
+          <%= image_tag @post.get_image(600,600), class:"card-img-top" %>
+          <div class"card-body">
+            <div class="card-title">
+              <h5 class="text-center pt-2"><%= @post.title %></h5>
+            </div>
+          </div>
+          <ul class="list-group list-group-flush list-group-horizontal-sm">
+              <li class="list-group-item" style="border:none;">都道府県: <%= link_to @prefecture.name, prefecture_path(@prefecture.id) %></li>
+              <li class="list-group-item" style="border:none;">エリア: <%= link_to  @post.area.name, area_path(@post.area.id) %></li>
+              <li class="list-group-item" style="border:none;">カテゴリー：<%= link_to @post.category.name, category_path(@post.category.id) %></li>
+          </ul>
+
+
+          <div class="card-body" style="min-height: 200px;">
+            <div>
+              <p class="card-text"><%= @post.body %></p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-link">
+              <% @post_tag.each do |tag| %>
+              #<%= link_to tag.name, search_path(content: tag.name, model: "Tag") %>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <% if user_signed_in? %>
+              <span class="favorite_<%= @post.id %>">
+                <%= render 'favorites/btn', post: @post %>
+              </span>
+            <% else %>
+              <%= link_to new_user_session_path do %>
+                <i class="far fa-heart fa-2x" style="color: red;"></i>
+                <span><%= @post.favorites.count %> いいね</span>
+              <% end %>
+            <% end %>
+            <% if @post_comments.exists? %>
+              <span><%= @rate_average %></span>
+            <% end %>
+            <% if user_signed_in? %>
+              <% if @post.user == current_user || current_user.admin == true %>
+                <%= link_to '編集画面へ', edit_post_path, class: "btn btn-outline-info" %>
+              <% end %>
+            <% end %>
+          </div>
+      </div>
     </div>
-    <div class="col">
-      <%= @post.user.name %>
-    </div>
-    <div class="col-8">
-      <div>
-        <%= image_tag @post.get_image(600,600) %>
-      </div>
-      <div>
-        <%= @post.title %>
-      </div>
-      <div>
-        <div>
-          都道府県: <%= link_to @prefecture.name, prefecture_path(@prefecture.id) %>
-          エリア: <%= link_to  @post.area.name, area_path(@post.area.id) %>
-        </div>
-        <div>
-          カテゴリー：<%= @post.category.name %>
-        </div>
-      </div>
-      <div>
-        <div>
-          <%= @post.body %>
-        </div>
-        <div>
-          <% @post_tag.each do |tag| %>
-          #<%= link_to tag.name, search_path(content: tag.name, model: "Tag") %>
-          <% end %>
-        </div>
-      </div>
-      <% if user_signed_in? %>
-      <div class="favorite_<%= @post.id %>">
-        <%= render 'favorites/btn', post: @post %>
-      </div>
-      <% else %>
-        <%= link_to new_user_session_path do %>
-          <i class="far fa-heart fa-2x" style="color: red;"></i>
-          <span><%= @post.favorites.count %> いいね</span>
-        <% end %>
-      <% end %>
-    </div>
-    <% if user_signed_in? %>
-      <% if @post.user == current_user || current_user.admin == true %>
-        <%= link_to '編集画面へ', edit_post_path, class: "btn btn-outline-info" %>
-      <% end %>
-    <% end %>
     <!--コメント一覧-->
-    <div class="col-3 post_comments_index">
+    <div class="col-md-3 post_comments_index">
       <%= render 'post_comments/index', post_comments: @post_comments, post: @post %>
     </div>
   </div>

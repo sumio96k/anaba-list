@@ -1,6 +1,13 @@
-<% post_comments.each do |post_comment| %>
-      <div class="col"><%= post_comment.comment %></div>
-      <div class="col" id="star-rate<%= post_comment.id%>"></div>
+<div class="card">
+  <div class="card-header">
+    <h6>コメント一覧</h6>
+  </div>
+  <% post_comments.each do |post_comment| %>
+    <div class="w-80 h-80">
+      <div class="card-body">
+        <div><%= post_comment.comment %></div>
+        <div class="" id="star-rate<%= post_comment.id%>"></div>
+
         <script>
           $('#star-rate<%= post_comment.id %>').empty();
           $('#star-rate<%= post_comment.id%>').raty({
@@ -13,14 +20,24 @@
             score: <%= post_comment.rate %>,
           });
         </script>
-      <div class="col"> by <%= post_comment.user.name %></div>
-      <div class="col">
-        <% if user_signed_in? %>
-          <% if post_comment.user == current_user || current_user.admin == true %>
-            <%= link_to post_post_comment_path(post, post_comment), method: :delete, remote: true do %>
-              <i class="fas fa-trash" style="color: gray;"></i>
+
+        <span class="card-link mt-2">
+          by <%= link_to post_comment.user.name, user_path(post_comment.user.id) %>
+        </span>
+        <span>
+          <%= image_tag post_comment.user.get_profile_image, size: "30x30", class: "rounded-circle" %>
+        </span>
+        <div class="d-flex flex-row-reverse">
+          <% if user_signed_in? %>
+            <% if post_comment.user == current_user || current_user.admin == true %>
+              <%= link_to post_post_comment_path(post, post_comment), method: :delete, remote: true do %>
+                <i class="fas fa-trash" style="color: gray;"></i>
+              <% end %>
             <% end %>
           <% end %>
-        <% end %>
+        </div>
       </div>
+    </div>
+
     <% end %>
+  </div>
