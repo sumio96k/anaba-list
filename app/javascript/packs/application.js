@@ -14,8 +14,8 @@ import "bootstrap";
 import "../stylesheets/application"
 import '@fortawesome/fontawesome-free/js/all'
 import "scripts/areas.js"
+// import "scripts/image_upload.js"
 
-console.log("res")
 
 window.$ = window.jQuery = require('jquery');
 import './raty'

@@ -9,13 +9,7 @@
       <h4>すべての<%= @category.name %> の投稿一覧</h4>
     <% end %>
   </div>
-  <div class="row row-cols-4">
-    <% @posts.each do |post| %>
-    <div class="col">
-      <%= link_to post_path(post.id) do %>
-        <%= image_tag post.get_image %>
-      <% end %>
-    </div>
-    <% end %>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+    <%= render 'posts/index', posts: @posts %>
   </div>
 </div>

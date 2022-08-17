@@ -1,25 +1,40 @@
 <%= render 'layouts/errors', obj: @post %>
-<h1>投稿ページ</h1>
-
-<%= form_with model: @post, url: posts_path, method: :post do |f| %>
-  <%= f.label :image do  %>
-    <i class="fas fa-file-image fa-4x"></i>
-    <%= f.file_field :image, style: "display: none;"  %>
-  <% end %>
-
-  <%= f.text_field :title, placeholder: "タイトル", class: "form-control" %>
-
-  <%= f.text_area :body, placeholder: "説明文", class: "form-control" %>
-
-  <%= f.text_field :address, placeholder: "大体の住所でOK", class: "form-control" %>
-
-  <%= f.collection_select(:category_id, Category.all, :id, :name, {include_blank: "カテゴリー選択"}, {class: "form-select"} ) %>
-
-  <%= f.collection_select(:prefecture, Prefecture.all, :id, :name, {include_blank: "都道府県選択"}, {class: "form-select prefecture_select"} ) %>
-
-  <%= f.collection_select(:area_id, Area.all, :id, :name, {include_blank: "エリア選択"}, {class: "form-select area_select"} ) %>
-
-  <%= f.text_field :name, placeholder: "タグ (スペースで区切ると複数タグ登録できます)", class: 'form-control' %>
-
-  <%= f.submit '投稿する', class: "btn btn-primary" %>
-<% end %>
+<div class="container">
+  <div class="row text-center pb-3 mb-3">
+    <h4>あなたのお気に入りの穴場スポットをシェアしましょう！！</h4>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-8">
+      <%= form_with model: @post, url: posts_path, method: :post do |f| %>
+      <div class="mb-3 text-center">
+        <!--<i class="fas fa-file-image fa-4x" id="image"></i>-->
+        <%= f.file_field :image, class: "form-control"%>
+      </div>
+      <div class="mb-3">
+        <%= f.text_field :title, placeholder: "タイトル", class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <%= f.text_area :body, placeholder: "説明文", class: "form-control", style: "min-height: 200px;" %>
+      </div>
+      <div class="mb-3">
+        <%= f.text_field :address, placeholder: "大体の住所でOK", class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <%= f.collection_select(:category_id, Category.all, :id, :name, {include_blank: "カテゴリー選択"}, {class: "form-select"} ) %>
+      </div>
+      <div class="mb-3">
+        <%= f.collection_select(:prefecture, Prefecture.all, :id, :name, {include_blank: "都道府県選択"}, {class: "form-select prefecture_select"} ) %>
+      </div>
+      <div class="mb-3">
+        <%= f.collection_select(:area_id, Area.all, :id, :name, {include_blank: "エリア選択"}, {class: "form-select area_select"} ) %>
+      </div>
+      <div class="mb-3">
+        <%= f.text_field :name, placeholder: "タグ (スペースで区切ると複数タグ登録できます)", class: 'form-control' %>
+      </div>
+      <div class="mb-3">
+        <%= f.submit '投稿する', class: "btn btn-primary" %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

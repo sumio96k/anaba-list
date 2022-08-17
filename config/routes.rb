@@ -23,8 +23,8 @@ Rails.application.routes.draw do
   end
   get 'favorites' => 'favorites#index'
 
-  get 'tag_search' => 'searches#tags_search'
   get 'search' => 'searches#search'
+  get 'select_search' => 'searches#select_search'
 
   resources :areas, only: [:index,:show]
   resources :prefectures, only: [:index, :show]
