@@ -1,39 +1,41 @@
 <!--ユーザー詳細-->
-<div class="container">
-  <div class="card mb-3" style="min-height: 400px;">
-    <div class="row g-0 mt-3">
-      <div class="col-md-5 text-center mx-3">
-        <%= image_tag @user.get_profile_image, size: "300x300", class: "rounded-circle border" %>
+<div class="card mb-3" style="min-height: 400px;">
+  <div class="row g-0 mt-3">
+    <div class="col-md-5 text-center mx-3">
+      <%= image_tag @user.get_profile_image, size: "250x250", class: "rounded-circle border" %>
+    </div>
+    <div class="col-md-5 offset-md-1">
+      <div class="card-body">
+        <h5 class="card-title"><%= @user.name %></h5>
+        <p class="card-text"><%= @user.introduction %></p>
       </div>
-      <div class="col-md-6">
-        <div class="card-body">
-          <h5 class="card-title"><%= @user.name %></h5>
-          <p class="card-text"><%= @user.introduction %></p>
-        </div>
+      <div class="card-body">
+        <p class="card-text">投稿数：<%= @user.posts.count %></p>
       </div>
     </div>
-    <!--編集ボタン等-->
-    <% if user_signed_in? %>
-      <% if @user == current_user || current_user.admin == true %>
-      <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3 mb-3">
-        <div class="mx-3">
-          <%= link_to new_post_path do %>
-            <i class="fas fa-camera fa-2x" style="color: black;"></i>
-          <% end %>
-        </div>
-        <div class="mx-3">
-          <%= link_to favorites_path do %>
-            <i class="fas fa-list fa-2x" style="color: black;"></i>
-          <% end %>
-        </div>
-        <%= link_to '編集する', edit_user_path, class: 'btn btn-secondary me-md-2 mx-3' %>
+  </div>
+  <!--編集ボタン等-->
+  <% if user_signed_in? %>
+    <% if @user == current_user || current_user.admin == true %>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3 mb-3">
+      <div class="mx-3">
+        <%= link_to new_post_path do %>
+          <i class="fas fa-camera fa-2x" style="color: black;"></i>
+        <% end %>
       </div>
-      <% end %>
+      <div class="mx-3">
+        <%= link_to favorites_path do %>
+          <i class="fas fa-list fa-2x" style="color: black;"></i>
+        <% end %>
+      </div>
+      <%= link_to '編集する', edit_user_path, class: 'btn btn-secondary me-md-2 mx-3' %>
+    </div>
     <% end %>
-  </div>
-
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mt-3">
-    <%= render 'posts/index', posts: @user.posts %>
-  </div>
+  <% end %>
 </div>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-4 mt-3">
+  <%= render 'posts/index', posts: @user.posts %>
+</div>
+
 

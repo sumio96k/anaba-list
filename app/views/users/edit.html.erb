@@ -1,43 +1,28 @@
 <%= render 'layouts/errors', obj: @user %>
-<div class="containe">
-
-    <%= form_with model: @user, url: user_path, method: :patch do |f| %>
-
-    <diV class="row">
-      <div class="col">
-        <%= f.label :profile_image do %>
-          <%= image_tag @user.get_profile_image %>
-          <%= f.file_field :profile_image, style: "display: none;" %>
-        <% end %>
-      </div>
+  <diV class="row">
+    <div class="col-md-10">
+      <%= form_with model: @user, url: user_path, method: :patch do |f| %>
+        <div class="mt-1">
+          <%= f.label :profile_image, "プロフィール写真" %>
+          <%= f.file_field :profile_image, class: "form-control" %>
+        </div>
+        <div class="mt-1">
+          <%= f.label :name, "名前" %>
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+        <div class="mt-2">
+          <%= f.label :introduction, "紹介文" %>
+          <%= f.text_area :introduction, class: "form-control", style: "min-height: 200px;" %>
+        </div>
+        <div class="mt-2">
+          <%= f.submit '保存する', class: "btn btn-outline-success" %>
+        </div>
+      <% end %>
     </div>
-
-    <div class="row">
-      <div class="col-4">
-        <%= f.label :name, "名前" %>
-        <%= f.text_field :name, class: "form-control name" %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-8">
-        <%= f.label :introduction, "紹介文" %>
-        <%= f.text_area :introduction, class: "form-control introduction" %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col">
-        <%= f.submit '保存する', class: "btn btn-outline-success" %>
-      </div>
-    </diV>
   </div>
 
-    <% end %>
-
-  <div class="row">
-    <div class="col">
+  <div class="row mt-2">
+    <div class="col-md-10">
       <%= link_to '退会する', unsubscribe_users_path, class: "btn btn-outline-danger" %>
     </div>
   </div>
-</div>

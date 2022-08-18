@@ -1,23 +1,25 @@
-<div class="row justify-content-center">
-  <div class="col my-2" style="max-width: 300px;">
-    <div class="border rounded bg-secondary text-white text-center">
-    <h7>絞り込み検索</h7>
+<div class="side_form">
+  <div class="row justify-content-center">
+    <div class="col my-2" style="max-width: 300px;">
+      <div class="border rounded bg-secondary text-white text-center">
+      <h7>絞り込み検索</h7>
+      </div>
     </div>
   </div>
+  <%= form_with url: select_search_path, method: :get do |f| %>
+  <div class="row justify-content-center text-center">
+    <div class="col-md-12 col-sm-auto my-2">
+      <%= f.collection_select(:category_id, Category.all, :id, :name, {include_blank: "カテゴリー選択"}, {class: "form-select"} ) %>
+    </div>
+    <div class="col-md-12 col-sm-auto my-2">
+      <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {include_blank: "都道府県選択"}, {class: "form-select prefecture_select"} ) %>
+    </div>
+    <div class="col-md-12 col-sm-auto my-2">
+      <%= f.collection_select(:area_id, Area.all, :id, :name, {include_blank: "エリア選択"}, {class: "form-select area_select text-wrap", style: "max-width: 10rem; min-height: 80px; margin: auto; display: bock;"} ) %>
+    </div>
+    <div class="col-md-12 col-sm-auto my-2">
+      <%= f.submit '検索', class: "btn btn-primary rounded-pill" %>
+    </div>
+  </div>
+  <% end %>
 </div>
-<%= form_with url: select_search_path, method: :get do |f| %>
-<div class="row justify-content-center text-center">
-  <div class="col-md-12 col-sm-auto my-2">
-    <%= f.collection_select(:category_id, Category.all, :id, :name, {include_blank: "カテゴリー選択"}, {class: "form-select"} ) %>
-  </div>
-  <div class="col-md-12 col-sm-auto my-2">
-    <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {include_blank: "都道府県選択"}, {class: "form-select prefecture_select"} ) %>
-  </div>
-  <div class="col-md-12 col-sm-auto my-2">
-    <%= f.collection_select(:area_id, Area.all, :id, :name, {include_blank: "エリア選択"}, {class: "form-select area_select text-wrap", style: "max-width: 10rem; min-height: 80px; margin: auto; display: bock;"} ) %>
-  </div>
-  <div class="col-md-12 col-sm-auto my-2">
-    <%= f.submit '検索', class: "btn btn-primary rounded-pill" %>
-  </div>
-</div>
-<% end %>

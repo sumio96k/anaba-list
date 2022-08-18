@@ -1,37 +1,33 @@
-<div class="container">
-  <% if @user == current_user %>
-  <div class="row">
-    <div class="col">
-      <h3>本当に退会しますか？</h3>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-2">
-      <%= link_to "戻る", edit_user_path(@user.id), class: "btn btn-outline-secondary" %>
-    </div>
-    <div class="col-2">
-      <%= link_to "退会する", user_path(@user.id), method: :delete, class: "btn btn-outline-danger" %>
-    </div>
-  </div>
-  <% elsif current_user.admin? %>
-  <div class="row">
-    <div class="col">
-      <h3>本当に<%= @user.name %>を退会させますか？</h3>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12">
-      <%= link_to "キャンセル", edit_user_path(@user.id), class: "btn btn-outline-secondary" %>
-    </div>
-    <div class="col-6 my-3">
-      <%= form_with model: @user, url: admin_withdraw_path(@user.id), method: :patch do |f| %>
-        <%= f.label :admin_memo, '退会理由' %>
-        <%= f.text_field :admin_memo, class: 'form-control' %>
-        <%= f.hidden_field :is_deleted, :value => true %>
-        <%= f.submit '退会させる', class: 'btn btn-danger mt-3' %>
-      <% end %>
-      <%#= link_to "退会させる", admin_withdraw_path(@user.id), method: :patch, class: "btn btn-outline-danger" %>
-    </div>
-  </div>
-  <% end %>
+<% if @user == current_user %>
+<div class="row justify-content-center">
+  <h3>本当に退会しますか？</h3>
 </div>
+<div class="row justify-content-center">
+  <div class="col">
+    <%= link_to "戻る", edit_user_path(@user.id), class: "btn btn-outline-secondary" %>
+  </div>
+  <div class="col">
+    <%= link_to "退会する", user_path(@user.id), method: :delete, class: "btn btn-outline-danger" %>
+  </div>
+</div>
+<% elsif current_user.admin? %>
+<div class="row">
+  <div class="col">
+    <h3>本当に<%= @user.name %>を退会させますか？</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <%= link_to "キャンセル", edit_user_path(@user.id), class: "btn btn-outline-secondary" %>
+  </div>
+  <div class="col-6 my-3">
+    <%= form_with model: @user, url: admin_withdraw_path(@user.id), method: :patch do |f| %>
+      <%= f.label :admin_memo, '退会理由' %>
+      <%= f.text_field :admin_memo, class: 'form-control' %>
+      <%= f.hidden_field :is_deleted, :value => true %>
+      <%= f.submit '退会させる', class: 'btn btn-danger mt-3' %>
+    <% end %>
+    <%#= link_to "退会させる", admin_withdraw_path(@user.id), method: :patch, class: "btn btn-outline-danger" %>
+  </div>
+</div>
+<% end %>

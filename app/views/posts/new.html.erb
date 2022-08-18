@@ -1,11 +1,11 @@
 <%= render 'layouts/errors', obj: @post %>
   <div class="row text-center pb-3 mb-3">
-    <div class="col-md-8 col-sm-10 offset-sm-2">
+    <div class="col-md-10 col-sm-10 offset-sm-2">
       <h4>あなたのお気に入りの穴場スポットをシェアしましょう！！</h4>
     </div>
   </div>
   <div class="row mt-3">
-    <div class="col-md-8 col-sm-10 offset-sm-2">
+    <div class="col-md-10 col-sm-10 offset-sm-2">
       <%= form_with model: @post, url: posts_path, method: :post do |f| %>
       <div class="mb-3 text-center">
         <!--<i class="fas fa-file-image fa-4x" id="image"></i>-->
