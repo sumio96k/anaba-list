@@ -29,25 +29,20 @@ class SearchesController < ApplicationController
     area_id = params[:area_id].to_i
     prefecture_id = params[:prefecture_id].to_i
     area_prefecture_ids = Area.where(prefecture_id: prefecture_id).ids
-
-    if params[:model] == "Post"
-      if params[:category_id].blank? == false && params[:area_id].blank? == true && params[:prefecture_id].blank? == true
-        #カテゴリーのみ選択された場合
-        @posts = Post.select_search_for(category_id, area_id, 0)
-      elsif params[:category_id].blank? == true && params[:area_id].blank? == true && params[:prefecture_id].blank? == false
-        #都道府県のみ選択された場合
-        @posts = Post.select_search_for(category_id, area_prefecture_ids, 1)
-      elsif  params[:category_id].blank? == true && params[:area_id].blank? == false && params[:prefecture_id].blank? == false
-        #カテゴリー以外が選択された場合
-        @posts = Post.select_search_for(category_id, area_id, 2)
-      elsif  params[:category_id].blank? == false && params[:area_id].blank? == false && params[:prefecture_id].blank? == false
-        #すべて選択された場合
-
-        @posts = Post.select_search_for(category_id, area_prefecture_ids, 3)
-      else
-        @posts = Post.all
-      end
-    elsif params[:model] == "User"
+    if params[:category_id].blank? == false && params[:area_id].blank? == true && params[:prefecture_id].blank? == true
+      #カテゴリーのみ選択された場合
+      @posts = Post.select_search_for(category_id, area_id, 0)
+    elsif params[:category_id].blank? == true && params[:area_id].blank? == true && params[:prefecture_id].blank? == false
+      #都道府県のみ選択された場合
+      @posts = Post.select_search_for(category_id, area_prefecture_ids, 1)
+    elsif  params[:category_id].blank? == true && params[:area_id].blank? == false && params[:prefecture_id].blank? == false
+      #カテゴリー以外が選択された場合
+      @posts = Post.select_search_for(category_id, area_id, 2)
+    elsif  params[:category_id].blank? == false && params[:area_id].blank? == false && params[:prefecture_id].blank? == false
+      #すべて選択された場合
+      @posts = Post.select_search_for(category_id, area_prefecture_ids, 3)
+    else
+      @posts = Post.all
     end
   end
 

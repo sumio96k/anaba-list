@@ -1,8 +1,6 @@
 <!--都道府県一覧-->
-<div class="container">
-  <div class="row">
-    <% @prefectures.each do |prefecture| %>
-      <%= link_to prefecture.name, prefecture_path(prefecture.id) %>
-    <% end %>
-  </div>
+<div class="row">
+  <% @prefectures.each do |prefecture| %>
+    <%= link_to prefecture.name, prefecture_path(prefecture.id) %>
+  <% end %>
 </div>

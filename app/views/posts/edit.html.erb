@@ -1,23 +1,33 @@
 <%= render 'layouts/errors', obj: @post %>
-<div class="container">
-  <div class-"row">
-    <div class="col">
-      <%= image_tag @post.get_image %>
+<div class-"row">
+  <div class="col-md-10 offset-md-2">
+    <%= image_tag @post.get_image, class: "img-fluid rounded" %>
+  </div>
+  <div class="col-md-10 offset-md-2 mt-2">
+    <%= form_with model: @post, url: post_path, method: :patch do |f| %>
+    <div>
+      <%= f.label :title, "タイトル" %>
+      <%= f.text_field :title, class: "form-control" %>
     </div>
-    <div class="col">
-      <%= form_with model: @post, url: post_path, method: :patch do |f| %>
-        <%= f.label :title, "タイトル" %>
-        <%= f.text_field :title, class: "form-control" %>
-        <%= f.label :title, "説明" %>
-        <%= f.text_area :body, class: "form-control" %>
-        <%= f.collection_select(:category_id, Category.all, :id, :name, {include_blank: "カテゴリー選択"}, {class: "form-select"} ) %>
-        <%= f.collection_select(:prefecture, Prefecture.all, :id, :name, {include_blank: "都道府県選択"}, {class: "form-select prefecture_select"} ) %>
-        <%= f.collection_select(:area_id, Area.all, :id, :name, {include_blank: "エリア選択"}, {class: "form-select area_select"} ) %>
-        <%= f.submit "保存する", class: "btn btn-outline-success" %>
-      <% end %>
+    <div>
+      <%= f.label :title, "説明" %>
+      <%= f.text_area :body, class: "form-control", style: "min-height: 200px;" %>
     </div>
-    <div class="col">
-      <%= link_to '削除する', post_path, method: :delete, class: "btn btn-outline-danger" %>
+    <div class="mt-2">
+      <%= f.collection_select(:category_id, Category.all, :id, :name, {include_blank: "カテゴリー選択"}, {class: "form-select"} ) %>
     </div>
+    <div class="mt-2">
+      <%= f.collection_select(:prefecture, Prefecture.all, :id, :name, {include_blank: "都道府県選択"}, {class: "form-select prefecture_select"} ) %>
+    </div>
+    <div class="mt-2">
+      <%= f.collection_select(:area_id, Area.all, :id, :name, {include_blank: "エリア選択"}, {class: "form-select area_select"} ) %>
+    </div>
+    <div class="mt-2">
+      <%= f.submit "保存する", class: "btn btn-outline-success" %>
+    </div>
+    <% end %>
+  </div>
+  <div class="col col-md-10 offset-md-2 mt-2">
+    <%= link_to '削除する', post_path, method: :delete, class: "btn btn-outline-danger" %>
   </div>
 </div>

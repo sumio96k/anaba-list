@@ -4,7 +4,13 @@ class PostCommentsController < ApplicationController
     comment = PostComment.new(post_comment_params)
     comment.user_id = current_user.id
     comment.post_id = @post.id
-    comment.save
+    # 評価を選択していない時は:rateに0を代入して保存
+    if params[:rate] == nil
+      comment.rate = 0
+      comment.save
+    else
+      comment.save
+    end
   end
 
   def destroy

@@ -14,7 +14,8 @@ class PostsController < ApplicationController
     @post_comments = @post.post_comments
     #レビューの平均値を求める
     rates = @post_comments.pluck(:rate)
-    @rate_average = rates.sum.fdiv(rates.length)
+    #0以外のレビューの数で平均を出す
+    @rate_average = rates.sum.fdiv(rates.length - rates.count(0))
     @favorite = Favorite.new
   end
 

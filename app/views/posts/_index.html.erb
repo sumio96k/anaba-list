@@ -1,8 +1,8 @@
 <% posts.each do |post| %>
-  <div class="col mb-3">
+  <div class="col mb-3" style="max-width: 20rem;">
     <div class="card h-100">
       <%= link_to post_path(post.id) do %>
-        <%= image_tag post.get_image, size: "200x200", class: "card-img-top" %>
+        <%= image_tag post.get_image, class: "card-img-top img-fluid" %>
       <% end %>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">都道府県: <%= link_to Prefecture.get_prefecture(post.area.prefecture_id).name, prefecture_path(post.area.prefecture_id) %></li>

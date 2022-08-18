@@ -4,14 +4,14 @@
     <div class="row">
       <h3>『』の投稿を含む検索結果</h3>
     </div>
-    <div class="row">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center">
       <%= render 'posts/index', posts: @posts %>
     </div>
   <% elsif @users.nil? != true %>
     <div class="row">
       <h3>『』のユーザーを含む検索結果</h3>
     </div>
-    <div class="row">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 justify-content-center">
       <%= render 'users/index', users: @users %>
     </div>
   <% end %>

@@ -1,5 +1,5 @@
 $(document).on('change', '.prefecture_select', function(){
-  let prefectureId = $('.prefecture_select').val();
+  let prefectureId = $(this).val();
 
   if (prefectureId != '') {
     $('.area_select').val('');

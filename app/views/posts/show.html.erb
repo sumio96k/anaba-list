@@ -1,84 +1,88 @@
 <!--投稿詳細ページ-->
-<div class="container">
-  <!--投稿詳細-->
-  <div class="row justify-content-around">
-    <div class="col-md-7">
-      <div class="card">
-        <div class="card-header">
-          <div class="row">
-            <div class="col-2">
-              <%= link_to user_path(@post.user.id) do %>
-                <%= image_tag @post.user.get_profile_image, size: "64x64", class: "rounded-circle" %>
-              <% end %>
-            </div>
-            <div class="col-9">
-                <p><%= @post.user.name %></p>
-                <p><%= @post.address %></p>
-            </div>
+<div class="row justify-content-around">
+  <div class="col-md-8 col-sm-11 mb-3">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-2">
+            <%= link_to user_path(@post.user.id) do %>
+              <%= image_tag @post.user.get_profile_image, size: "64x64", class: "rounded-circle" %>
+            <% end %>
+          </div>
+          <div class="col-8 offset-2">
+              <p><%= @post.user.name %></p>
+              <p><%= @post.address %></p>
+          </div>
+        </div>
+      </div>
+
+        <%= image_tag @post.get_image, class:"card-img-top rounded img-fluid" %>
+        <div class"card-body">
+          <div class="card-title">
+            <h5 class="text-center pt-2"><%= @post.title %></h5>
+          </div>
+        </div>
+        <ul class="list-group list-group-flush list-group-horizontal-sm">
+            <li class="list-group-item" style="border:none;">都道府県: <%= link_to @prefecture.name, prefecture_path(@prefecture.id) %></li>
+            <li class="list-group-item" style="border:none;">エリア: <%= link_to  @post.area.name, area_path(@post.area.id) %></li>
+            <li class="list-group-item" style="border:none;">カテゴリー：<%= link_to @post.category.name, category_path(@post.category.id) %></li>
+        </ul>
+
+
+        <div class="card-body" style="min-height: 200px;">
+          <div>
+            <p class="card-text"><%= @post.body %></p>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="card-link">
+            <% @post_tag.each do |tag| %>
+            #<%= link_to tag.name, search_path(content: tag.name, model: "Tag") %>
+            <% end %>
           </div>
         </div>
 
-          <%= image_tag @post.get_image, size: "400x400", class:"card-img-top rounded" %>
-          <div class"card-body">
-            <div class="card-title">
-              <h5 class="text-center pt-2"><%= @post.title %></h5>
-            </div>
-          </div>
-          <ul class="list-group list-group-flush list-group-horizontal-sm">
-              <li class="list-group-item" style="border:none;">都道府県: <%= link_to @prefecture.name, prefecture_path(@prefecture.id) %></li>
-              <li class="list-group-item" style="border:none;">エリア: <%= link_to  @post.area.name, area_path(@post.area.id) %></li>
-              <li class="list-group-item" style="border:none;">カテゴリー：<%= link_to @post.category.name, category_path(@post.category.id) %></li>
-          </ul>
-
-
-          <div class="card-body" style="min-height: 200px;">
-            <div>
-              <p class="card-text"><%= @post.body %></p>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="card-link">
-              <% @post_tag.each do |tag| %>
-              #<%= link_to tag.name, search_path(content: tag.name, model: "Tag") %>
-              <% end %>
-            </div>
-          </div>
-
-          <div class="card-footer">
+        <div class="card-footer">
+          <div class="d-flex justify-content-around">
             <% if user_signed_in? %>
-              <span class="favorite_<%= @post.id %>">
+              <div class="favorite_<%= @post.id %>">
                 <%= render 'favorites/btn', post: @post %>
-              </span>
+              </div>
             <% else %>
-              <%= link_to new_user_session_path do %>
-                <i class="far fa-heart fa-2x" style="color: red;"></i>
-                <span><%= @post.favorites.count %> いいね</span>
-              <% end %>
+              <div>
+                <%= link_to new_user_session_path do %>
+                  <i class="far fa-heart fa-2x" style="color: red;"></i>
+                  <span><%= @post.favorites.count %> いいね</span>
+                <% end %>
+              </div>
             <% end %>
             <% if @post_comments.exists? %>
-              <span><%= @rate_average %></span>
+              <div>
+                評価：<%= @rate_average %>
+              </div>
             <% end %>
             <% if user_signed_in? %>
               <% if @post.user == current_user || current_user.admin == true %>
-                <%= link_to '編集画面へ', edit_post_path, class: "btn btn-outline-info" %>
+              <div class="">
+                <%= link_to '編集画面', edit_post_path, class: "btn btn-outline-info" %>
+              </div>
               <% end %>
             <% end %>
           </div>
-      </div>
-    </div>
-    <!--コメント一覧-->
-    <div class="col-md-3 post_comments_index">
-      <%= render 'post_comments/index', post_comments: @post_comments, post: @post %>
+        </div>
     </div>
   </div>
-
-  <!--コメント投稿-->
-  <% if user_signed_in? %>
-    <div class="row mt-3">
-      <div class="col">
-        <%= render 'post_comments/form', post: @post, post_comment: @post_comment %>
-      </div>
-    </div>
-  <% end %>
-
+  <!--コメント一覧-->
+  <div class="col-md-4 col-sm-11 post_comments_index">
+    <%= render 'post_comments/index', post_comments: @post_comments, post: @post %>
+  </div>
 </div>
+
+<!--コメント投稿-->
+<% if user_signed_in? %>
+  <div class="row mt-3">
+    <div class="col">
+      <%= render 'post_comments/form', post: @post, post_comment: @post_comment %>
+    </div>
+  </div>
+<% end %>
