@@ -1,17 +1,19 @@
 <% for category_id in categories.ids do %>
-  <div class="row mb-3">
-    カテゴリー：
-    <%= link_to category_path(id: category_id, second_id: obj.id, key: obj.class.name) do %>
-    <%= categories.find_by(id: category_id).name %>&emsp;...もっと見る
-    <% end %>
+  <div class="row mb-3 ml-2">
+    <div class="col">
+      カテゴリー：
+      <%= link_to category_path(id: category_id, second_id: obj.id, key: obj.class.name) do %>
+      <%= categories.find_by(id: category_id).name %>&emsp;...もっと見る
+      <% end %>
+    </div>
   </div>
 
-  <div class="row row-cols-auto mb-3">
-    <% posts.where(category_id: category_id).limit(12).order(id: "DESC").each do |post| %>
+  <div class="row row-cols-auto mb-3 ml-2">
+    <% posts.where(category_id: category_id).each do |post| %>
     <div class="col mb-3">
-      <%= link_to post_path(post) do %>
-        <%= image_tag post.get_image, size:"100x100", class:"rounded" %>
-      <% end %>
+    <%= link_to post_path(post) do %>
+      <%= image_tag post.get_image, size:"100x100", class:"rounded" %>
+    <% end %>
     </div>
     <% end %>
   </div>

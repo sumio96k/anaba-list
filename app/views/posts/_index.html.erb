@@ -1,6 +1,9 @@
 <% posts.each do |post| %>
   <div class="col mb-3" style="max-width: 20rem;">
     <div class="card h-100">
+      <div class="card-header" style="background-color: lightblue; color: white;">
+        <%= post.title %>
+      </div>
       <%= link_to post_path(post.id) do %>
         <%= image_tag post.get_image, class: "card-img-top img-fluid" %>
       <% end %>

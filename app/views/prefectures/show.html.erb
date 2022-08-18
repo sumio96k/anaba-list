@@ -1,8 +1,6 @@
 <!--都道府県詳ページ-->
-<div class="container">
-  <div class="row justify-content-center">
-    <h2><%= @prefecture.name %>の投稿一覧</h2>
-  </div>
-    <%= render 'common/show', categories: @categories, obj: @prefecture, posts: @posts %>
+<div class="row justify-content-center mb-3">
+  <h3><%= @prefecture.name %>の投稿一覧</h3>
 </div>
+<%= render 'common/show', categories: @categories, obj: @prefecture, posts: @posts %>
 
