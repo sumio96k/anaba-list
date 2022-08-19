@@ -1,18 +1,19 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <h3>違反ユーザー一覧</h3>
-    </div>
-    <% @deleted_users.each do |deleted_user| %>
-      <div class="col">
-        <%= image_tag deleted_user.get_profile_image %>
-      </div>
-      <div class="col">
-        名前：<%= deleted_user.name %>
-      </div>
-      <div class="col">
-        退会理由：<%= deleted_user.admin_memo %>
-      </div>
-    <% end %>
+<div class="row">
+  <div class="col text-center mb-3">
+    <h3>違反ユーザー一覧</h3>
   </div>
 </div>
+<div class="row row-cols-3">
+<% @deleted_users.each do |deleted_user| %>
+  <div class="col-md-2">
+    <%= image_tag deleted_user.get_profile_image, size: "100x100", class: "rounded-circle" %>
+  </div>
+  <div class="col-md-2 offset-md-1">
+    名前：<%= deleted_user.name %>
+  </div>
+  <div class="col-md-3 offset-md-1">
+    退会理由：<%= deleted_user.admin_memo %>
+  </div>
+<% end %>
+</div>
+
