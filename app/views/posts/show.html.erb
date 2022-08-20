@@ -43,7 +43,7 @@
         </div>
 
         <div class="card-footer">
-          <div class="d-flex justify-content-around">
+          <div class="d-flex justify-content-between">
             <% if user_signed_in? %>
               <div class="favorite_<%= @post.id %>">
                 <%= render 'favorites/btn', post: @post %>
@@ -56,21 +56,25 @@
                 <% end %>
               </div>
             <% end %>
-            <% if @post_comments.exists? %>
-              <div>
-                評価：<%= @rate_average %>
-              </div>
-            <% end %>
-            <% if user_signed_in? %>
-              <% if @post.user == current_user || current_user.admin == true %>
-              <div class="">
-                <%= link_to '編集画面', edit_post_path, class: "btn btn-outline-info" %>
-              </div>
+            <div class="rate_average">
+              <% if @post_comments.exists? %>
+                <%= render 'posts/rates', rate_average: @rate_average %>
               <% end %>
-            <% end %>
+            </div>
+            <div>
+              <% if user_signed_in? %>
+                <% if @post.user == current_user || current_user.admin == true %>
+                  <%= link_to '編集画面', edit_post_path, class: "btn btn-outline-info" %>
+                <% end %>
+              <% end %>
+            </div>
           </div>
         </div>
     </div>
+    <!--コメント投稿-->
+    <% if user_signed_in? %>
+      <%= render 'post_comments/form', post: @post, post_comment: @post_comment %>
+    <% end %>
   </div>
   <!--コメント一覧-->
   <div class="col-md-4 col-sm-11 post_comments_index">
@@ -78,11 +82,4 @@
   </div>
 </div>
 
-<!--コメント投稿-->
-<% if user_signed_in? %>
-  <div class="row mt-3">
-    <div class="col">
-      <%= render 'post_comments/form', post: @post, post_comment: @post_comment %>
-    </div>
-  </div>
-<% end %>
+
