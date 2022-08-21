@@ -4,6 +4,7 @@ class PostCommentsController < ApplicationController
     comment = PostComment.new(post_comment_params)
     comment.user_id = current_user.id
     comment.post_id = @post.id
+    @post_comment = PostComment.new
     if params[:post_comment][:rate].blank?
     # 評価を選択していない時は:rateに0を代入して保存
       comment.rate = 0

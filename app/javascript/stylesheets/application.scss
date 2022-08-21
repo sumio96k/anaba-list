@@ -1,10 +1,12 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
-.area_select {
+.side_area_select {
   display: none;
 }
-
+.main_area_select {
+  display: none;
+}
 .side_form {
   postion: -webkit-sticky;
   position: sticky;

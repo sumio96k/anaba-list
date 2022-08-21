@@ -12,10 +12,10 @@
       <%= f.collection_select(:category_id, Category.all, :id, :name, {include_blank: "カテゴリー選択"}, {class: "form-select"} ) %>
     </div>
     <div class="col-md-12 col-sm-auto my-2">
-      <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {include_blank: "都道府県選択"}, {class: "form-select prefecture_select"} ) %>
+      <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, {include_blank: "都道府県選択"}, {class: "form-select side_prefecture_select"} ) %>
     </div>
     <div class="col-md-12 col-sm-auto my-2">
-      <%= f.collection_select(:area_id, Area.all, :id, :name, {include_blank: "エリア選択"}, {class: "form-select area_select text-wrap", style: "max-width: 10rem; min-height: 80px; margin: auto; display: bock;"} ) %>
+      <%= f.collection_select(:area_id, Area.all, :id, :name, {include_blank: "エリア選択"}, {class: "form-select side_area_select text-wrap", style: "max-width: 10rem; min-height: 80px; margin: auto; display: bock;"} ) %>
     </div>
     <div class="col-md-12 col-sm-auto my-2">
       <%= f.submit '検索', class: "btn btn-primary rounded-pill" %>

@@ -73,7 +73,9 @@
     </div>
     <!--コメント投稿-->
     <% if user_signed_in? %>
-      <%= render 'post_comments/form', post: @post, post_comment: @post_comment %>
+    <div id="post_comment_form">
+      <%= render partial: 'post_comments/form', locals: {post: @post, post_comment: @post_comment} %>
+    </div>
     <% end %>
   </div>
   <!--コメント一覧-->
