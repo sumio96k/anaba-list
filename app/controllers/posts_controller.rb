@@ -12,8 +12,6 @@ class PostsController < ApplicationController
     @post_tag = @post.tags
     @post_comment = PostComment.new
     @post_comments = @post.post_comments
-    #コメントの評価の平均を出す
-    @rate_average = Post.rate_average(@post)
     @favorite = Favorite.new
   end
 

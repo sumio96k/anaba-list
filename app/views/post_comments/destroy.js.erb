@@ -1,2 +1,2 @@
 $(".post_comments_index").html("<%= escape_javascript(render partial: 'post_comments/index', locals: {post_comments: @post.post_comments, post: @post}) %>");
-$(".rate_average").html("<%= escape_javascript(render partial: 'posts/rates', locals: {rate_average: @rate_average}) %>");
+$(".rate_average").html("<%= escape_javascript(render partial: 'posts/rates', locals: {post: @post}) %>");

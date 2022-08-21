@@ -57,8 +57,8 @@
               </div>
             <% end %>
             <div class="rate_average">
-              <% if @post_comments.exists? %>
-                <%= render 'posts/rates', rate_average: @rate_average %>
+              <% if @post.rate != nil %>
+                <%= render 'posts/rates', post: @post %>
               <% end %>
             </div>
             <div>

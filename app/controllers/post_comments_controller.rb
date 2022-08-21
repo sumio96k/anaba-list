@@ -9,10 +9,11 @@ class PostCommentsController < ApplicationController
     # 評価を選択していない時は:rateに0を代入して保存
       comment.rate = 0
       comment.save
-      @rate_average = Post.rate_average(@post)
     else
+    # 評価があれば
       comment.save
-      @rate_average = Post.rate_average(@post)
+      rate_average = Post.rate_average(@post)
+      @post.update(rate: rate_average)
     end
   end
 
@@ -21,7 +22,13 @@ class PostCommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     post_comments = @post.post_comments
     rates = post_comments.pluck(:rate)
-    @rate_average = rates.sum.fdiv(rates.length - rates.count(0)).floor(2)
+    rate_average = Post.rate_average(@post)
+    if rate_average.nan?
+      #コメントが削除された際平均を計算してNaNになったらrateにnilを入れる
+      @post.update(rate: nil)
+    else
+      @post.update(rate: rate_average)
+    end
   end
 
   def post_comment_params
