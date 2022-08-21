@@ -18,7 +18,8 @@
     <% elsif user_signed_in? && (current_user.admin == true) %>
       <span>管理者ログイン中</span>
     <% end %>
-    <div class="container">
+    <main>
+    <div class="container main">
       <div class="row">
         <div class="col-lg-2 col-md-3 col-sm-3">
           <%= render 'searches/side_form' %>
@@ -28,6 +29,7 @@
         </div>
       </div>
     </div>
+    </main>
     <%= render 'layouts/footer' %>
   </body>
 </html>

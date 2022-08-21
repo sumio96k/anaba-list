@@ -19,7 +19,11 @@
     </div>
   <% end %>
 </div>
-<% @post_lanks.each do |post| %>
-  <%= post.title %>
+<!--<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center mt-3">-->
+  <%#= render 'posts/index', posts: @post_rate_lanks %>
+<!--</div>-->
+<% @post_rate_lanks.first(3).each do |post| %>
+  <%= post.id %>
 <% end %>
+
 

@@ -69,7 +69,7 @@ class Post < ApplicationRecord
     end
   end
 
-  #コメントの０以外の評価の平均を出してPostのrateにupdateする
+  #コメントの０以外の評価の平均を出しす
   def self.rate_average(post)
       rates = post.post_comments.pluck(:rate)
       rate_average = rates.sum.fdiv(rates.length - rates.count(0)).floor(2)
