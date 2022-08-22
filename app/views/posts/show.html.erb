@@ -6,12 +6,12 @@
         <div class="row">
           <div class="col-2">
             <%= link_to user_path(@post.user.id) do %>
-              <%= image_tag @post.user.get_profile_image, size: "64x64", class: "rounded-circle" %>
+              <%= image_tag @post.user.get_profile_image, size: "64x64", class: "rounded-circle border border-white" %>
             <% end %>
           </div>
           <div class="col-8 offset-2">
-              <h5><%= @post.user.name %></h5>
-              <p><%= @post.address %></p>
+              <h5 class="card-title"><%= @post.user.name %></h5>
+              <p class="card-text"><%= @post.address %></p>
           </div>
         </div>
       </div>
@@ -52,7 +52,7 @@
               <div>
                 <%= link_to new_user_session_path do %>
                   <i class="far fa-heart fa-2x" style="color: red;"></i>
-                  <span><%= @post.favorites.count %> いいね</span>
+                  <span class="favo"><%= @post.favorites.count %> いいね</span>
                 <% end %>
               </div>
             <% end %>

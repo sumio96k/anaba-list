@@ -2,9 +2,9 @@
 <% posts.each do |post| %>
   <div class="col-md-6 col-lg-4 mt-3 mb-3" style="max-width: 20rem;">
     <div class="card h-100">
-      <div class="card-header" style="background-color: lightblue; color: white;">
+      <div class="card-header">
         <%= image_tag post.user.get_profile_image, size: "30x30", class: "rounded-circle border border-white" %>
-        <%= link_to post.title.truncate(10), post_path(post.id), class: "ml-2", style: "color: white; font-size: 90%;" %>
+        <%= link_to post.title.truncate(10), post_path(post.id), class: "ml-2", style: "color: white;" %>
       </div>
       <%= link_to post_path(post.id) do %>
         <%= image_tag post.get_image, class: "card-img-top img-fluid" %>
