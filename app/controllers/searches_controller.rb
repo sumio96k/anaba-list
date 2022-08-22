@@ -29,7 +29,6 @@ class SearchesController < ApplicationController
     area_id = params[:area_id].to_i
     prefecture_id = params[:prefecture_id].to_i
     area_prefecture_ids = Area.where(prefecture_id: prefecture_id).ids
-    # binding.pry
     if params[:category_id].blank? == false && params[:area_id].blank? == true && params[:prefecture_id].blank? == true
       #カテゴリーのみ選択された場合
       @posts = Post.select_search_for(category_id, area_id, 0)
@@ -38,13 +37,17 @@ class SearchesController < ApplicationController
       #都道府県のみ選択された場合
       @posts = Post.select_search_for(category_id, area_prefecture_ids, 1)
       @result = Prefecture.find(prefecture_id).name
+    elsif  params[:category_id].blank? == false && params[:area_id].blank? == true && params[:prefecture_id].blank? == false
+      #カテゴリーと都道府県のみ選択された場合
+      @posts = Post.select_search_for(category_id, area_prefecture_ids, 2)
+      @result = Prefecture.find(prefecture_id).name + "の" + Category.find(category_id).name
     elsif  params[:category_id].blank? == true && params[:area_id].blank? == false && params[:prefecture_id].blank? == false
       #カテゴリー以外が選択された場合
-      @posts = Post.select_search_for(category_id, area_id, 2)
+      @posts = Post.select_search_for(category_id, area_id, 3)
       @result = Area.find(area_id).name
     elsif  params[:category_id].blank? == false && params[:area_id].blank? == false && params[:prefecture_id].blank? == false
       #すべて選択された場合
-      @posts = Post.select_search_for(category_id, area_prefecture_ids, 3)
+      @posts = Post.select_search_for(category_id, area_id, 4)
       @result = Area.find(area_id).name + "エリアの" +Category.find(category_id).name
     else
       @posts = Post.all

@@ -53,19 +53,22 @@ class Post < ApplicationRecord
     posts = Post.where("title LIKE? or body LIKE? or address LIKE?", "%#{content}%","%#{content}%","%#{content}%")
   end
   # binding.pry
-  def self.select_search_for(category_id, area_id, key)
+  def self.select_search_for(category_id, area_or_prefecture_id, key)
     if key == 0
       #カテゴリーのみ選択された場合
       posts = Post.where(category_id: category_id)
     elsif key == 1
       #都道府県のみ選択された場合
-      posts = Post.where(area_id: area_id)
+      posts = Post.where(area_id: area_or_prefecture_id)
     elsif key == 2
       #カテゴリー以外が選択された場合
-      posts = Post.where(area_id: area_id)
+      posts = Post.where(category_id: category_id, area_id: area_or_prefecture_id)
     elsif key == 3
+      #カテゴリー以外が選択された場合
+      posts = Post.where(area_id: area_or_prefecture_id)
+    elsif key == 4
       #カテゴリーとエリアが選択されたか、すべて選択された場合
-      posts = Post.where(category_id: category_id, area_id: area_id)
+      posts = Post.where(category_id: category_id, area_id: area_or_prefecture_id)
     end
   end
 
