@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
   patch 'users/:id/withdraw' => 'users#withdraw', as: 'withdraw'
 
-
+  get 'orders' => 'orders#index'
 
   resources :posts, only: [:index, :show, :edit, :update, :create, :update, :destroy, :new] do
     resources :post_comments, only: [:create, :destroy]

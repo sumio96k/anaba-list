@@ -1,0 +1,10 @@
+
+<%= link_to "新着順", orders_path(method: :new), method: :get, remote: true %>
+
+<%= link_to "高評価＆コメントの多い順", orders_path(method: :high_rate), method: :get, remote: true %>
+
+<%= link_to "いいねの多い順", orders_path(method: :many_favorites), method: :get, remote: true %>
+<%#= form_with url: orders_path, method: :get, local: false do |f| %>
+  <%#= f.select :method, [["新着順", "new"],["高評価＆コメントの多い順", "high_rate"],["いいねの多い順", "many_favorites"]], include_blank: "並び替え" %>
+  <%#= f.submit "▼" %>
+<%# end %>

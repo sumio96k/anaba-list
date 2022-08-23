@@ -9,6 +9,7 @@ class Post < ApplicationRecord
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
   has_many :favorites, dependent: :destroy
+  has_many :favorited_users, through: :favorites, source: :user
 
   validates :title, presence: true
   validates :body, presence: true, length:{maximum: 200}
@@ -49,26 +50,42 @@ class Post < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
 
+  #キーワード検索
   def self.search_for(content)
     posts = Post.where("title LIKE? or body LIKE? or address LIKE?", "%#{content}%","%#{content}%","%#{content}%")
   end
-  # binding.pry
-  def self.select_search_for(category_id, area_or_prefecture_id, key)
-    if key == 0
+
+  #セレクトボックスでの絞り込み検索
+  def self.select_search_for(category_id, area_id, prefecture_id, area_prefecture_id)
+    if category_id >= 1 && area_id == 0 && prefecture_id == 0
       #カテゴリーのみ選択された場合
       posts = Post.where(category_id: category_id)
-    elsif key == 1
+      result = Category.find(category_id).name
+      return posts, result
+    elsif category_id == 0 && area_id == 0 && prefecture_id >= 1
       #都道府県のみ選択された場合
-      posts = Post.where(area_id: area_or_prefecture_id)
-    elsif key == 2
+      posts = Post.where(area_id: area_prefecture_id)
+      result = Prefecture.find(prefecture_id).name
+      return posts, result
+    elsif  category_id >= 1 && area_id == 0 && prefecture_id >= 1
+      #カテゴリーと都道府県のみ選択された場合
+      posts = Post.where(category_id: category_id, area_id: area_prefecture_id)
+      result = Prefecture.find(prefecture_id).name + "の" + Category.find(category_id).name
+      return posts, result
+    elsif  category_id == 0 && area_id >= 1 && prefecture_id >= 1
       #カテゴリー以外が選択された場合
-      posts = Post.where(category_id: category_id, area_id: area_or_prefecture_id)
-    elsif key == 3
-      #カテゴリー以外が選択された場合
-      posts = Post.where(area_id: area_or_prefecture_id)
-    elsif key == 4
-      #カテゴリーとエリアが選択されたか、すべて選択された場合
-      posts = Post.where(category_id: category_id, area_id: area_or_prefecture_id)
+      posts = Post.where(area_id: area_id)
+      result = Area.find(area_id).name
+      return posts, result
+    elsif  category_id >= 1 && area_id >= 1 && prefecture_id >= 1
+      #すべて選択された場合
+      posts = Post.where(category_id: category_id, area_id: area_id)
+      result = Area.find(area_id).name + "エリアの" +Category.find(category_id).name
+      return posts, result
+    elsif  category_id == 0 && area_id == 0 && prefecture_id == 0
+      posts = Post.all
+      result = "すべて"
+      return posts, result
     end
   end
 
@@ -78,4 +95,18 @@ class Post < ApplicationRecord
       rate_average = rates.sum.fdiv(rates.length - rates.count(0)).floor(2)
   end
 
+  #並び替え
+  def self.post_orders(method)
+
+    if method == "new"
+      new_posts = Post.order(created_at: :DESC)
+    elsif method == "high_rate"
+      #コメントの多い順投稿を取得する
+      post_comment_lanks = Post.includes(:post_comments).sort {|a,b| b.post_comments.size <=> a.post_comments.size}
+      #さらにrateの高い順で並び替える
+      post_rate_lanks = post_comment_lanks.sort{|a,b| b[:rate].to_i<=>a[:rate].to_i}
+    elsif method == "many_favorites"
+      post_like_ranks = Post.includes(:favorited_users).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size}
+    end
+  end
 end

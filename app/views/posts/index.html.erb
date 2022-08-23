@@ -4,6 +4,10 @@
     <h3>すべての投稿</h3>
   </div>
 </div>
-<div class="row justify-content-center mt-3">
+<!--並び替え-->
+<div class="row">
+  <%= render 'orders/select' %>
+</div>
+<div class="row justify-content-center mt-3 orders">
   <%= render'index', posts: @posts %>
 </div>
