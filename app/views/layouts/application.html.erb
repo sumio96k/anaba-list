@@ -11,15 +11,9 @@
 
   <body>
     <%= render 'layouts/header' %>
-    <% if user_signed_in? && (current_user.name != "guestuser") && (current_user.admin == false) %>
-      <span>ログイン中</span>
-    <% elsif user_signed_in? && (current_user.name == "guestuser") %>
-      <span>ゲストユーザーログイン中</span>
-    <% elsif user_signed_in? && (current_user.admin == true) %>
-      <span>管理者ログイン中</span>
-    <% end %>
+
     <main>
-    <div class="container main">
+    <div class="container main mt-5">
       <div class="row">
         <div class="col-lg-2 col-md-3 col-sm-3">
           <%= render 'searches/side_form' %>

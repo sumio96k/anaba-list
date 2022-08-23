@@ -1,7 +1,7 @@
 <% users.each do |user| %>
-  <div class="col mt-3">
+  <div class="col mt-3 text-center">
     <%= link_to user_path(user.id) do %>
-      <%= image_tag user.get_profile_image, size: "100x100", class: "rounded-circle" %><br>
+      <%= image_tag user.get_profile_image, size: "100x100", class: "rounded-circle biguser-img" %><br>
       <%= user.name %>
     <% end %>
   </div>

@@ -1,15 +1,24 @@
 <% if @posts.nil? != true %>
-  <div class="row justify-content-center mt-3">
-    <h3>『<%= @content %>』の投稿を含む検索結果</h3>
+  <div class="row justify-content-center">
+    <div class="col-10 text-center">
+      <h3>『<%= @content %>』の投稿を含む検索結果</h3>
+    </div>
   </div>
   <div class="row justify-content-center mt-3">
     <%= render 'posts/index', posts: @posts %>
   </div>
 <% elsif @users.nil? != true %>
-  <div class="row">
-    <h3>『<%= @content %>』のユーザーを含む検索結果</h3>
+  <div class="row justify-content-center">
+    <div class="col-10 text-center">
+      <h3>『<%= @content %>』のユーザーを含む検索結果</h3>
+    </div>
   </div>
-  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mt-3">
+  <div class="row justify-content-center mt-5">
+    <div class="col-8">
+      <%= render 'searches/user_search_form' %>
+    </div>
+  </div>
+  <div class="row mt-5">
     <%= render 'users/index', users: @users %>
   </div>
 <% end %>

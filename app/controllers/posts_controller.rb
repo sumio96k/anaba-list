@@ -59,8 +59,8 @@ class PostsController < ApplicationController
   end
 
   def correct_user_without_admin
-    @post = Post.find(params[:id])
     if user_signed_in?
+      @post = Post.find(params[:id])
       redirect_to posts_path unless @post.user == current_user || current_user.admin == true
     else
       redirect_to posts_path

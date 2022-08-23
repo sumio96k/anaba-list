@@ -24,18 +24,63 @@ main {
 
 .card {
   font-size: 90%;
+  background-color: #efefef;
+  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, .5);
 }
 
 .card-header {
-  background-color: lightblue;
+  background-color: #00afcc;
   color: white;
 }
 
+.card-body {
+  background-color: #efefef;
+}
+
+.list-group-item {
+  background-color: #efefef;
+}
+
 .card-footer {
-  background-color: lightblue;
+  background-color: #00afcc;
   color: white;
 }
 
 .favorite {
   color: white;
+}
+
+.comment-textarea {
+  background-color: #efefef;
+  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, .5);
+}
+
+.only-post-img {
+  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, .5);
+}
+
+.user-img {
+  border: 2px solid;
+  border-color: white;
+}
+
+.biguser-img {
+  border-right: 5px solid;
+  border-bottom: 5px solid;
+  border-color: #001e43;
+}
+
+.user-card {
+  border-top: 5px solid;
+  border-left: 5px solid;
+  border-color: #001e43;
+}
+
+.common-box {
+  padding: 0.5em 1em;
+  margin: 2em 0;
+  color: #5d627b;
+  background: white;
+  border-top: solid 5px #5d627b;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
 }

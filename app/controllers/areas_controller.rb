@@ -6,6 +6,6 @@ class AreasController < ApplicationController
   def show
     @categories = Category.all
     @area = Area.find(params[:id])
-    @posts = @area.posts.limit(12).order(id: "DESC")
+    @posts = @area.posts.order(id: "DESC")
   end
 end

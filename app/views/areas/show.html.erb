@@ -1,5 +1,7 @@
 <!--エリア詳細ページ-->
 <div class="row justify-content-center mb-3">
-  <h3><%= @area.name %>エリアの投稿一覧</h3 >
+  <div class="col-11 text-center">
+    <h3 class="mx-3"><%= @area.name %>エリアの投稿一覧</h3>
+  </div>
 </div>
 <%= render 'common/show', categories: @categories, obj: @area, posts: @posts %>

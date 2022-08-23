@@ -3,17 +3,30 @@
     <h3>違反ユーザー一覧</h3>
   </div>
 </div>
-<div class="row row-cols-3">
-<% @deleted_users.each do |deleted_user| %>
-  <div class="col-md-2">
-    <%= image_tag deleted_user.get_profile_image, size: "100x100", class: "rounded-circle" %>
+<div class="row justify-content-center">
+  <div class="col-8">
+    <%= render 'searches/user_search_form' %>
   </div>
-  <div class="col-md-2 offset-md-1">
-    名前：<%= deleted_user.name %>
-  </div>
-  <div class="col-md-3 offset-md-1">
-    退会理由：<%= deleted_user.admin_memo %>
-  </div>
-<% end %>
 </div>
+
+  <% @deleted_users.each do |deleted_user| %>
+  <div class="row mt-5">
+    <div class="col-5 offset-1 col-md-3 offset-md-0">
+      <%= image_tag deleted_user.get_profile_image, size: "100x100", class: "rounded-circle" %>
+    </div>
+    <div class="col-5 col-md-2">
+      名前：<%= deleted_user.name %>
+    </div>
+    <div class="col-5 offset-1 col-md-5 offset-md-0">
+      退会理由：<p class="text-break"><%= deleted_user.admin_memo %></p>
+    </div>
+    <div class="col-5 col-md-2">
+      <%= form_with model: deleted_user, url: admin_withdraw_path(deleted_user.id), method: :patch do |f| %>
+        <%= f.hidden_field :is_deleted, :value => false %>
+        <%= f.submit '復活', class: 'btn btn-secondary mt-3' %>
+      <% end %>
+    </div>
+  </div>
+  <% end %>
+
 

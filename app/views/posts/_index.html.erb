@@ -3,13 +3,13 @@
   <div class="col-md-6 col-lg-4 mt-3 mb-3" style="max-width: 20rem;">
     <div class="card h-100">
       <div class="card-header">
-        <%= image_tag post.user.get_profile_image, size: "30x30", class: "rounded-circle border border-white" %>
-        <%= link_to post.title.truncate(10), post_path(post.id), class: "ml-2", style: "color: white;" %>
+        <%= image_tag post.user.get_profile_image, size: "30x30", class: "rounded-circle user-img" %>
+        <%= link_to post.title.truncate(9), post_path(post.id), class: "ml-2", style: "color: white;" %>
       </div>
       <%= link_to post_path(post.id) do %>
         <%= image_tag post.get_image, class: "card-img-top img-fluid" %>
       <% end %>
-      <ul class="list-group list-group-flush">
+      <ul class="list-group list-group-flush card-list">
         <li class="list-group-item">都道府県: <%= link_to Prefecture.get_prefecture(post.area.prefecture_id).name, prefecture_path(post.area.prefecture_id) %></li>
         <li class="list-group-item">エリア: <%= link_to post.area.name, area_path(post.area.id) %></li>
         <li class="list-group-item">カテゴリー: <%= link_to post.category.name, category_path(post.category_id) %></li>

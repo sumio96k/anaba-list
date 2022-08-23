@@ -1,73 +1,73 @@
 <header>
   <nav class ="navbar navbar-expand-lg navbar-light border-bottom border-dark">
-        <div class="container">
-          <a class="navbar-brand text-dark" href="/">
-            <span><%= image_tag 'logo.png', :size => '140x50' %></span>
-          </a>
-          <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="navbar-collapse collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto">
-              <!--検索フォーム-->
-              <li><%= render 'searches/header_form' %></li>
-              <% if user_signed_in? %>
-                <% if current_user.admin? %>
-                  <li>
-                    <%= link_to admin_users_path, class: 'nav-link text-dark' do %>
-                      <i class="fas fa-users" style="color: red;"></i> 退会させたユーザー
-                    <% end %>
-                  </li>
-                  <li>
-                    <%= link_to users_path, class: 'nav-link text-dark' do %>
-                      <i class="fas fa-users"></i> Users
-                    <% end %>
-                  </li>
+    <div class="container">
+      <a class="navbar-brand text-dark" href="/">
+        <span><%= image_tag 'logo.png', :size => '140x50' %></span>
+      </a>
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+          <!--検索フォーム-->
+          <li><%= render 'searches/header_form' %></li>
+          <% if user_signed_in? %>
+            <% if current_user.admin? %>
+              <li>
+                <%= link_to admin_users_path, class: 'nav-link text-dark' do %>
+                  <i class="fas fa-users" style="color: red;"></i> <span>違反ユーザー</span>
                 <% end %>
-                <li>
-                  <%= link_to new_post_path, class: 'nav-link text-dark' do %>
-                  <i class="fas fa-camera"></i> New Post
-                  <% end %>
-                </li>
-                <li>
-                  <%= link_to user_path(current_user.id), class: 'nav-link text-dark' do %>
-                  <i class="fas fa-user"></i> My Page
-                  <% end %>
-                </li>
-
-                <li>
-                  <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-dark' do %>
-                  <i class="fas fa-sign-out-alt"></i> Log out
-                  <% end %>
-                </li>
-              <% else %>
-                <li>
-                  <%= link_to '/', class: 'nav-link text-dark' do %>
-                  <i class="fas fa-home"></i> Top
-                  <% end %>
-                </li>
-                <li>
-                  <%= link_to about_path, class: 'nav-link text-dark' do %>
-                  <i class="fas fa-link"></i> About
-                  <% end %>
-                </li>
-                <li>
-                  <%= link_to new_user_registration_path, class: 'nav-link text-dark' do %>
-                  <i class="fas fa-user-plus"></i> Sign up
-                  <% end %>
-                </li>
-                <li>
-                  <%= link_to new_user_session_path, class: 'nav-link text-dark' do %>
-                  <i class="fas fa-sign-in-alt"></i> Log in
-                  <% end %>
-                </li>
-                <li>
-                  <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post, class: 'nav-link text-dark' %>
-                </li>
+              </li>
+              <li>
+                <%= link_to users_path, class: 'nav-link text-dark' do %>
+                  <i class="fas fa-users"></i> Users
+                <% end %>
+              </li>
+            <% end %>
+            <li>
+              <%= link_to new_post_path, class: 'nav-link text-dark' do %>
+              <i class="fas fa-camera"></i> New Post
               <% end %>
-            </ul>
-          </div>
-        </div>
-      </nav>
+            </li>
+            <li>
+              <%= link_to user_path(current_user.id), class: 'nav-link text-dark' do %>
+              <i class="fas fa-user"></i> My Page
+              <% end %>
+            </li>
+
+            <li>
+              <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-dark' do %>
+              <i class="fas fa-sign-out-alt"></i> Log out
+              <% end %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to '/', class: 'nav-link text-dark' do %>
+              <i class="fas fa-home"></i> Top
+              <% end %>
+            </li>
+            <li>
+              <%= link_to about_path, class: 'nav-link text-dark' do %>
+              <i class="fas fa-link"></i> About
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_user_registration_path, class: 'nav-link text-dark' do %>
+              <i class="fas fa-user-plus"></i> Sign up
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_user_session_path, class: 'nav-link text-dark' do %>
+              <i class="fas fa-sign-in-alt"></i> Log in
+              <% end %>
+            </li>
+            <li>
+              <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post, class: 'nav-link text-dark' %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
 </header>
