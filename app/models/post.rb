@@ -96,16 +96,16 @@ class Post < ApplicationRecord
   end
 
   #並び替え
-  def self.post_orders(method)
+  def self.post_orders(order)
 
-    if method == "new"
+    if order == "new"
       new_posts = Post.order(created_at: :DESC)
-    elsif method == "high_rate"
+    elsif order == "high_rate"
       #コメントの多い順投稿を取得する
       post_comment_lanks = Post.includes(:post_comments).sort {|a,b| b.post_comments.size <=> a.post_comments.size}
       #さらにrateの高い順で並び替える
       post_rate_lanks = post_comment_lanks.sort{|a,b| b[:rate].to_i<=>a[:rate].to_i}
-    elsif method == "many_favorites"
+    elsif order == "many_favorites"
       post_like_ranks = Post.includes(:favorited_users).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size}
     end
   end
