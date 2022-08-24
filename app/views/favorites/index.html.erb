@@ -1,16 +1,15 @@
 <div class="row justify-content-center mb-3">
-  <h3>お気に入り穴場リストページ</h3>
+  <div class="col text-center">
+    <h5>マイお気に入り穴場リストページ</h5>
+  </div>
 </div>
 <div class="row">
   <% @favorite_lists.each do |favorite_list| %>
-  <div class="col-md-6 col-lg-4 text-center">
-    <div>
+  <div class=" col-3 col-md-4 col-lg-4 text-center pl-1 pr-1">
+    <div class="card">
       <%= link_to post_path(favorite_list.id) do %>
-        <%= image_tag favorite_list.get_image, size: "200x200", class: "rounded" %>
+        <%= image_tag favorite_list.get_image, class: "card-img rounded" %>
       <% end %>
-    </div>
-    <div class="mb-3">
-      <%= favorite_list.title %>
     </div>
   </div>
   <% end %>

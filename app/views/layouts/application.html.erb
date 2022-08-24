@@ -13,16 +13,35 @@
     <%= render 'layouts/header' %>
 
     <main>
-    <div class="container main mt-5">
-      <div class="row">
-        <div class="col-lg-2 col-md-3 col-sm-3">
-          <%= render 'searches/side_form' %>
+      <div class="user-icon">
+        <% if user_signed_in? %>
+          <%= link_to user_path(current_user) do %>
+            <%= image_tag current_user.get_profile_image, size: "47x47", class: " card rounded-circle" %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="container main">
+        <div class="row">
+          <div class="col-10 col-lg-9 col-md-8 col-sm-8 offset-sm-3">
+            <div class="d-flex justify-content-center mt-3">
+              <div class="mr-2 common-btn">
+                <%= link_to 'すべての投稿', posts_path, style: "color: white; font-size: 15px;" %>
+              </div>
+              <div class="common-btn">
+                <%= link_to 'すべてのユーザー', users_path, style: "color: white; font-size: 15px;" %></p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-lg-9 col-md-8 col-sm-8 offset-sm-1">
-          <%= yield %>
+        <div class="row">
+          <div class="col-lg-2 col-md-3 col-sm-3 mt-3">
+            <%= render 'searches/side_form' %>
+          </div>
+          <div class="col-lg-9 col-md-8 col-sm-8 offset-sm-1">
+            <%= yield %>
+          </div>
         </div>
       </div>
-    </div>
     </main>
     <%= render 'layouts/footer' %>
   </body>

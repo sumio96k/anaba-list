@@ -8,7 +8,7 @@ class Admin::UsersController < ApplicationController
   def withdraw
     @user = User.find(params[:id])
     #管理者が退会させたらis_deletedをtrue 復活させるならfalseでupdate
-    if params[:user][:is_deleted] == true
+    if params[:user][:is_deleted] == "true"
       @user.update(user_params)
     else
       @user.update(is_deleted: false, admin_memo: nil)
