@@ -101,11 +101,14 @@ class Post < ApplicationRecord
     if order == "new"
       new_posts = Post.order(created_at: :DESC)
     elsif order == "high_rate"
-      #コメントの多い順投稿を取得する
+      #コメントの多い順に投稿を取得する
       post_comment_lanks = Post.includes(:post_comments).sort {|a,b| b.post_comments.size <=> a.post_comments.size}
+      # post_rate_lanks = Post.all.sort{|a,b| b[:rate].to_i<=>a[:rate].to_i}
+      # post_comment_rate_lanks =
       #さらにrateの高い順で並び替える
       post_rate_lanks = post_comment_lanks.sort{|a,b| b[:rate].to_i<=>a[:rate].to_i}
     elsif order == "many_favorites"
+      #いいねが多い順で並び替え
       post_like_ranks = Post.includes(:favorited_users).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size}
     end
   end

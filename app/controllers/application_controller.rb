@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
     @user = User.find_by(email: params[:user][:email])
     return if !@user
     if @user.valid_password?(params[:user][:password]) && (@user.is_deleted == true)
+      flash[:danger] = "このアカウントは使えません"
       redirect_to new_user_registration_path
     end
   end
