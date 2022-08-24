@@ -30,7 +30,7 @@ class PostsController < ApplicationController
     tag_list = params[:post][:name].split(nil)
     if @post.save
       @post.save_tag(tag_list)
-      flash[:notice] = "You have created book successfully."
+      flash[:succes] = "投稿しました！"
       redirect_to post_path(@post.id)
     else
       render :new
@@ -40,6 +40,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
+      flash[:succes] = "編集しました！"
       redirect_to post_path(@post.id)
     else
       render :edit
@@ -49,6 +50,7 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
+    flash[:danger] = "投稿を削除しました！"
     redirect_to user_path(@post.user.id)
   end
 

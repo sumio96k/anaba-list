@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   before_action :correct_user_without_admin, only: [:edit, :update]
   before_action :ensure_guest_user, only: [:edit]
 
@@ -9,8 +10,15 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    if @user.admin == true || @user.is_deleted == true
-      redirect_to root_path
+    #管理者以外は管理者のマイページと退会ユーザーのマイページを閲覧できない
+    if user_signed_in?
+      if current_user.admin == false && @user.admin == true || @user.is_deleted == true
+        redirect_to root_path
+      end
+    else
+      if @user.admin == true || @user.is_deleted == true
+        redirect_to root_path
+      end
     end
     @posts = @user.posts
     @prefectures = Prefecture.all
@@ -23,6 +31,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
+      flash[:succes] = "プロフィールを編集しました！"
       redirect_to user_path(current_user.id)
     else
       render :edit
@@ -32,18 +41,12 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
+    flash[:danger] = "退会しました！"
     redirect_to root_path
   end
 
   def unsubscribe
     @user = User.find(params[:id])
-  end
-
-  def withdraw
-    @user = User.find(params[:id])
-    @user.update(is_deleted: true)
-    sign_out current_user
-    redirect_to root_path
   end
 
   private

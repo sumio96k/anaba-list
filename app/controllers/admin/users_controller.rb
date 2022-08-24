@@ -10,8 +10,10 @@ class Admin::UsersController < ApplicationController
     #管理者が退会させたらis_deletedをtrue 復活させるならfalseでupdate
     if params[:user][:is_deleted] == "true"
       @user.update(user_params)
+      flash[:danger] = "#{@user.name}を退会させました！"
     else
       @user.update(is_deleted: false, admin_memo: nil)
+      flash[:succes] = "#{@user.name}を復活させました！"
     end
     redirect_to admin_users_path
   end

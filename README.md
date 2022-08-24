@@ -39,3 +39,7 @@
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
 - IDE：Cloud9
+
+## 使用素材
+- 画像素材：[pixabay](https://pixabay.com/ja/)
+- サイトロゴ素材：[Hatchful](https://hatchful.shopify.com/ja/)

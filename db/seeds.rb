@@ -9,7 +9,7 @@
 users = User.create!(
   [
     {name: "管理者", email: "000@000", password: "000000", password_confirmation: "000000", admin: true,
-    profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/admin.jpg"), filename:"admin.jpg")},
+    profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/admin1.png"), filename:"admin1.png")},
 
     {name: "ぎんじ", email: "ginji@test.com", password: "password", password_confirmation: "password", admin: false, introduction: "初めまして！東京の穴場スポットを発信していきます！",
     profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-user1.jpg"), filename:"sample-user1.jpg")},
