@@ -96,8 +96,7 @@ class Post < ApplicationRecord
   end
 
   #並び替え
-  def self.post_orders(order)
-
+  def Post.post_orders(order)
     if order == "new"
       new_posts = Post.order(created_at: :DESC)
     elsif order == "high_rate" #コメント数が多く、評価が高い順
