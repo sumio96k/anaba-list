@@ -30,10 +30,10 @@ users = User.create!(
     {title: '東京タワーの下', body: '東京タワーを下から見るこの場所が好きです。', address: '東京都港区芝公園', category_id: 2, area_id: 93, user_id: users[1].id, rate: 1.75,
     image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post1.jpg"), filename:"sample-post1.jpg")},
 
-    {title: '大阪の地下お笑い劇場', body: '大阪なんばにひっそりとあるお笑い劇場です。アングラなお笑いが見れます', address: '大阪府難波', category_id: 2, area_id: 212, user_id: users[2].id, rate: 5.0,
+    {title: '大阪の地下お笑い劇場', body: '大阪なんばにひっそりとあるお笑い劇場です。アングラなお笑いが見れます', address: '大阪府難波', category_id: 2, area_id: 212, user_id: users[2].id,
     image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post2.jpg"), filename:"sample-post2.jpg")},
 
-    {title: '名古屋絶品台湾ラーメン', body: '名古屋にある日本で一番美味しい(と思っている)台湾ラーメンのお店です。', address: '愛知県名古屋市名東区', category_id: 4, area_id: 178, user_id: users[3].id, rate: 3.83,
+    {title: '名古屋絶品台湾ラーメン', body: '名古屋にある日本で一番美味しい(と思っている)台湾ラーメンのお店です。', address: '愛知県名古屋市名東区', category_id: 4, area_id: 178, user_id: users[3].id, rate: 4.0,
     image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post3.jpg"), filename:"sample-post3.jpg")},
 
     {title: '東京でサーフィンが体験できる!?', body: 'サーフィンが体験できる施設です', address: '東京都品川区', category_id: 5, area_id: 93, user_id: users[1].id, rate: 3.0,
@@ -43,17 +43,14 @@ users = User.create!(
 
 PostComment.create!(
   [
-    #投稿が多いが評価が低い
+    #コメントが多いが評価が低い
     {user_id: users[3].id, post_id: posts[0].id,comment: "いいですね～！", rate: 2.0}, {user_id: users[2].id, post_id: posts[0].id,comment: "まあまあかな", rate: 1.5},
     {user_id: users[1].id, post_id: posts[0].id,comment: "いってみたい！"},
-    #評価は高いがコメントが少ない
-    {user_id: users[0].id, post_id: posts[1].id,comment: "おもしろそうですね", rate: 5.0},
-    #コメントが多く評価が高い
-    {user_id: users[3].id, post_id: posts[2].id,comment: "おいしそう！", rate: 4.0}, {user_id: users[1].id, post_id: posts[2].id,comment: "おいしかった", rate: 4.5},
-    {user_id: users[0].id, post_id: posts[2].id,comment: "きになる！", rate: 3.0},
+    #コメントが少なく評価が高い
+    {user_id: users[3].id, post_id: posts[2].id,comment: "おいしそう！", rate: 4.0},
     #投稿が多いが評価はふつう
     {user_id: users[3].id, post_id: posts[3].id,comment: "すご～！", rate: 3.0}, {user_id: users[2].id, post_id: posts[3].id,comment: "楽しそう", rate: 3.0},
-    {user_id: users[1].id, post_id: posts[3].id,comment: "いってみたい！", rate: 3.0}
+
   ]
 )
 

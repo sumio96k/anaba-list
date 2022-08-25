@@ -100,13 +100,11 @@ class Post < ApplicationRecord
 
     if order == "new"
       new_posts = Post.order(created_at: :DESC)
-    elsif order == "high_rate"
-      #コメントの多い順に投稿を取得する
-      post_comment_lanks = Post.includes(:post_comments).sort {|a,b| b.post_comments.size <=> a.post_comments.size}
-      # post_rate_lanks = Post.all.sort{|a,b| b[:rate].to_i<=>a[:rate].to_i}
-      # post_comment_rate_lanks =
-      #さらにrateの高い順で並び替える
-      post_rate_lanks = post_comment_lanks.sort{|a,b| b[:rate].to_i<=>a[:rate].to_i}
+    elsif order == "high_rate" #コメント数が多く、評価が高い順
+      #「コメントの評価がnil」を除いたコメント数が多くかつ投稿の評価が高い順に並び替える
+      #sort_byメソッドを使い 「post.post_commentsの多い順(post.post_commentsをcountメソッドでrateがnilを除くコメントが多い投稿順に並び替え)」と
+      #「postのrateが高い順」を条件に並び替えを行う
+      post_comment_and_rate_lanks = Post.includes(:post_comments).sort_by{|post| [-post.post_comments.count{|comment| !comment.rate.nil?}, -post[:rate].to_i]}
     elsif order == "many_favorites"
       #いいねが多い順で並び替え
       post_like_ranks = Post.includes(:favorited_users).sort {|a,b| b.favorited_users.size <=> a.favorited_users.size}
