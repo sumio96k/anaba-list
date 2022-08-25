@@ -1,15 +1,5 @@
 <%= form_with url: orders_path, method: :get, local: false do |f| %>
   <%= f.select :order, [["新着順", "new"],["高評価＆コメントの多い順", "high_rate"],["いいねの多い順", "many_favorites"]],
   include_blank: "並び替え" %>
-  <%# if current_page?(controller: 'posts', action: 'index') %>
-    <%#= hidden_field_tag :page, "posts" %>
-  <%# elsif current_page?(controller: 'searches', action: 'search') %>
-    <%#= hidden_field_tag :page, "search" %>
-  <%# elsif current_page?(controller: 'searches', action: 'select_search') %>
-    <%#= hidden_field_tag :page, "select_search" %>
-    <%#= hidden_field_tag :category_id, posts.group(:category_id).pluck(:category_id) %>
-    <%#= hidden_field_tag :area_id, posts.group(:area_id).pluck(:area_id) %>
-    <%#= hidden_field_tag :prefecture_id, Prefecture.find(Area.find(posts.group(:area_id).pluck(:area_id)).pluck(:prefecture_id)).pluck(:id) %>
-  <%# end %>
   <%= f.submit "▼" %>
 <% end %>
