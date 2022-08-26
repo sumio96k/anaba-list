@@ -8,6 +8,13 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    #コメントしたユーザーが退会した場合もあるためrateを再度計算させる
+    rate_average = Post.rate_average(@post)
+    if rate_average.nan? #コメントが削除された際平均を計算してNaNになったらrateにnilを入れる
+      @post.update(rate: nil)
+    else
+      @post.update(rate: rate_average)
+    end
     @prefecture = Prefecture.find_by(id: @post.area.prefecture_id)
     @post_tag = @post.tags
     @post_comment = PostComment.new
@@ -17,7 +24,6 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
-    @post_comments = @post.post_comments
   end
 
   def new
