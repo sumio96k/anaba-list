@@ -9,7 +9,7 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @post_comments = @post.post_comments
-    #コメントのrateにnilが含まれていた場合メソッドで計算ができないためnilをすべて0に変える(初期データのエラーのみ)
+    #コメントのrateにnilが含まれていた場合メソッドで計算ができないためnilをすべて0に変える(初期データのみエラー)
     if @post_comments.exists?(rate: nil)
       @post_comments.where(rate: nil).update_all(rate: 0)
     end
@@ -37,7 +37,12 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    tag_list = params[:post][:name].split(nil)
+    if params[:post][:name].include?("#") #半角シャープの場合
+    #最初のシャープと他で分けて最初のシャープは取り除き残ったものをさらにシャープで分ける
+      tag_list = params[:post][:name].split('#',2).last.split('#')
+    elsif params[:post][:name].include?("＃") #全角シャープの場合
+      tag_list = params[:post][:name].split('＃',2).last.split('＃')
+    end
     if @post.save
       @post.save_tag(tag_list)
       flash[:succes] = "投稿しました！"

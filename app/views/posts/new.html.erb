@@ -30,7 +30,9 @@
         <%= f.collection_select(:area_id, Area.all, :id, :name, {include_blank: "エリア選択"}, {class: "form-select main_area_select"} ) %>
       </div>
       <div class="mb-3">
-        <%= f.text_field :name, placeholder: "タグ (スペースで区切ると複数タグ登録できます)", class: 'form-control' %>
+        <%= f.label :name, "ハッシュタグ" %>
+        <%= f.text_field :name, placeholder: "タグ(例#旅行#海#昔ながら.....)", class: 'form-control' %>
+        <%= f.label :name, "タグ名の先頭に#をつけて、スペースを空けずに入力してください(半角の#でお願いします)", style: "font-size: 10px" %>
       </div>
       <div class="mb-3">
         <%= f.submit '投稿する', class: "btn btn-primary" %>
