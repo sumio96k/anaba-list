@@ -104,7 +104,7 @@ class Post < ApplicationRecord
       #「コメントの評価がnil」を除いたコメント数が多くかつ投稿の評価が高い順に並び替える
       #sort_byメソッドを使い 「post.post_commentsの多い順(post.post_commentsをcountメソッドでrateがnilを除くコメントが多い投稿順に並び替え)」と
       #「postのrateが高い順」を条件に並び替えを行う
-
+      # 評価をしていないコメントを除いたコメント数が多い投稿 >  評価をしていないコメントを除いた、コメント数が同じコメント数同士で評価の平均が高い投稿 の順番
       post_comment_and_rate_lanks = Post.includes(:post_comments).sort_by{|post| [-post.post_comments.count{|comment| !comment.rate.nil?}, -post[:rate].to_i]}
     elsif order == "many_favorites"
       #いいねが多い順で並び替え
