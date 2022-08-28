@@ -36,7 +36,7 @@ users = User.create!(
     {title: '名古屋絶品台湾ラーメン', body: '名古屋にある日本で一番美味しい(と思っている)台湾ラーメンのお店です。', address: '愛知県名古屋市名東区', category_id: 4, area_id: 178, user_id: users[3].id, rate: 4.0,
     image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post3.jpg"), filename:"sample-post3.jpg")},
 
-    {title: '東京でサーフィンが体験できる!?', body: 'サーフィンが体験できる施設です', address: '東京都品川区', category_id: 5, area_id: 93, user_id: users[1].id, rate: 3.0,
+    {title: '東京でサーフィンが体験できる!?', body: 'サーフィンが体験できる施設です', address: '東京都品川区', category_id: 5, area_id: 94, user_id: users[1].id, rate: 3.0,
     image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/sample-post4.jpg"), filename:"sample-post4.jpg")}
   ]
 )

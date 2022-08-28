@@ -10,7 +10,7 @@
             <% end %>
           </div>
           <div class="col-8 offset-2">
-              <h5 class="card-title"><%= @post.user.name %></h5>
+              <h5 class="card-title"><%= link_to @post.user.name, user_path(@post.user.id), style: "color: white;" %></h5>
               <p class="card-text"><%= @post.address %></p>
           </div>
         </div>

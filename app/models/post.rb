@@ -91,8 +91,9 @@ class Post < ApplicationRecord
 
   #コメントの０以外の評価の平均を出しす
   def self.rate_average(post)
-      rates = post.post_comments.pluck(:rate)
-      rate_average = rates.sum.fdiv(rates.length - rates.count(0)).floor(2)
+    #nilが含まれているものを除く
+      rates = post.post_comments - post.post_comments.where(rate: nil)
+      rate_average = rates.pluck(:rate).sum.fdiv(rates.length - rates.count(0)).floor(2)
   end
 
   #並び替え
@@ -103,6 +104,7 @@ class Post < ApplicationRecord
       #「コメントの評価がnil」を除いたコメント数が多くかつ投稿の評価が高い順に並び替える
       #sort_byメソッドを使い 「post.post_commentsの多い順(post.post_commentsをcountメソッドでrateがnilを除くコメントが多い投稿順に並び替え)」と
       #「postのrateが高い順」を条件に並び替えを行う
+
       post_comment_and_rate_lanks = Post.includes(:post_comments).sort_by{|post| [-post.post_comments.count{|comment| !comment.rate.nil?}, -post[:rate].to_i]}
     elsif order == "many_favorites"
       #いいねが多い順で並び替え

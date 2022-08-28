@@ -9,10 +9,6 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @post_comments = @post.post_comments
-    #コメントのrateにnilが含まれていた場合メソッドで計算ができないためnilをすべて0に変える(初期データのみエラー)
-    if @post_comments.exists?(rate: nil)
-      @post_comments.where(rate: nil).update_all(rate: 0)
-    end
     #コメントしたユーザーが退会した場合もあるためrateを再度計算させる
     rate_average = Post.rate_average(@post)
     if rate_average.nan? #コメントが削除された際平均を計算してNaNになったらrateにnilを入れる
