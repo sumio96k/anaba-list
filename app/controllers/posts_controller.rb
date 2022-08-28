@@ -33,11 +33,14 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+
     if params[:post][:name].include?("#") #半角シャープの場合
     #最初のシャープと他で分けて最初のシャープは取り除き残ったものをさらにシャープで分ける
       tag_list = params[:post][:name].split('#',2).last.split('#')
     elsif params[:post][:name].include?("＃") #全角シャープの場合
       tag_list = params[:post][:name].split('＃',2).last.split('＃')
+    else
+      tag_list = []
     end
     if @post.save
       @post.save_tag(tag_list)
