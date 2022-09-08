@@ -63,7 +63,7 @@ gem "net-imap"
 # gem 'pry-byebug', group: :development
 gem 'devise'
 gem 'active_hash'
-# gem 'rails-i18n'
+gem 'rails-i18n'
 
 gem 'dotenv-rails'
 group :production do

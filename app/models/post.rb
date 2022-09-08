@@ -14,8 +14,8 @@ class Post < ApplicationRecord
   validates :title, presence: true
   validates :body, presence: true, length:{maximum: 200}
   validates :address, presence: true
-  validates :category, presence: true
-  validates :area, presence: true
+  validates :category_id, numericality: { message: 'を選択してください'}
+  validates :area_id, numericality: { message: 'を選択してください'}
 
 
   def get_image
