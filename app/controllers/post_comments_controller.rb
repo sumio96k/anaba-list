@@ -6,8 +6,8 @@ class PostCommentsController < ApplicationController
     comment.post_id = @post.id
     @post_comment = PostComment.new
     if params[:post_comment][:rate].blank?
-    # 評価を選択していない時は:rateに0を代入して保存(エラーになるため)
-      comment.rate = 0
+    # 評価を選択していない時は:rateにnilを代入して保存(エラーになるため)
+      comment.rate = nil
       comment.save
     else
     # 評価があれば平均値を出してPostのrateカラムに保存する

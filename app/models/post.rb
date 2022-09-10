@@ -94,7 +94,7 @@ class Post < ApplicationRecord
   def self.rate_average(post)
     #nilが含まれているものを除く
       rates = post.post_comments - post.post_comments.where(rate: nil) - post.post_comments.where(rate: 0)
-      rate_average = rates.pluck(:rate).sum.fdiv(rates.length - rates.count(0)).floor(2)
+      rate_average = rates.pluck(:rate).sum.fdiv(rates.length).floor(2)
   end
 
   #並び替え
