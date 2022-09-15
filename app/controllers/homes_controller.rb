@@ -4,6 +4,7 @@ class HomesController < ApplicationController
     #投稿数の多いエリアを多い順に取得して取得してそこから都道府県を取得する
     area_lanks = Area.find(Post.group(:area_id).order('count(area_id) desc').pluck(:area_id))
     @prefecture_lanks = Prefecture.find(area_lanks.pluck(:prefecture_id))
+
   end
 
   def about
