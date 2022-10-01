@@ -12,7 +12,7 @@ class PostCommentsController < ApplicationController
     else
     # 評価があれば平均値を出してPostのrateカラムに保存する
       comment.save
-      rate_average = Post.rate_average(@post)
+      rate_average = @post.rate_average(@post)
       @post.update(rate: rate_average)
     end
   end
@@ -21,7 +21,7 @@ class PostCommentsController < ApplicationController
     PostComment.find(params[:id]).destroy
     @post = Post.find(params[:post_id])
     post_comments = @post.post_comments
-    rate_average = Post.rate_average(@post)
+    rate_average = @post.rate_average(@post)
     if rate_average.nan?
       #コメントが削除された際平均を計算してNaNになったらrateにnilを入れる
       @post.update(rate: nil)

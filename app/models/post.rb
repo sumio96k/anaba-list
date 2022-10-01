@@ -91,14 +91,14 @@ class Post < ApplicationRecord
   end
 
   #コメントの０以外の評価の平均を出しす
-  def self.rate_average(post)
+  def rate_average(post)
     #nilが含まれているものを除く
       rates = post.post_comments - post.post_comments.where(rate: nil) - post.post_comments.where(rate: 0)
       rate_average = rates.pluck(:rate).sum.fdiv(rates.length).floor(2)
   end
 
   #並び替え
-  def Post.post_orders(order)
+  def self.post_orders(order)
     if order == "new"
       new_posts = Post.order(created_at: :DESC)
     elsif order == "high_rate" #コメント数が多く、評価が高い順

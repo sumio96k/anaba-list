@@ -10,7 +10,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post_comments = @post.post_comments
     #コメントしたユーザーが退会した場合もあるためrateを再度計算させる
-    rate_average = Post.rate_average(@post)
+    rate_average = @post.rate_average(@post)
     if rate_average.nan? #コメントが削除された際平均を計算してNaNになったらrateにnilを入れる
       @post.update(rate: nil)
     else
